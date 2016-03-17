@@ -7,9 +7,10 @@ package main;
 public class Main {
     /**
      * First java program
+     *
      * @param args : program arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello Java Online Projects!");
+        System.out.println("Hello " + args[0] + "!");
     }
 }
