@@ -16,6 +16,10 @@
   5. `git remote set-url --push origin https://github.com/YouGitHub/YourRepo.git` - настройка push
   6. `git push -u origin master`
 
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFVFJuR2tBZVVXT00">Приложение "Hello Webapp". Debug. Выполнение домашнего задания в ветке HW1</a>
+- <a href="http://info.javarush.ru/idea_help/2014/01/22/Руководство-пользователя-IntelliJ-IDEA-Отладчик-.html">Отладчик IntelliJ IDEA</a>
+- <a href="http://jeeconf.com/archive/jeeconf-2013/materials/intellij-idea/">Эффективная работа с кодом в IntelliJ IDEA</a>
+
 ### Сегодня выложу остальные видео
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW01
