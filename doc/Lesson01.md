@@ -1,70 +1,52 @@
 Практика Java. Разработка Web приложения.
 ===============================
+
+## Проект: https://github.com/JavaWebinar/webapp
+
 ## Урок 1
 
-- Знакомство с Adobe Meeting
-- IDEA: Version Control, toolbar, интеграция с git, UTF-8, plugins, password для git
-- Настройка проекта:
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFWUxzYlQtQlA5ZkU">Настройка проекта</a>
+- <a href="https://github.com/JavaOPs/topjava/wiki/Git">Git Wiki</a> (актуально все кроме патчей, на этом проекте пока без них)
+- <a href="https://github.com/JavaOPs/topjava/wiki/IDEA">Idea Wiki</a> (поставить кодировку UTF-8, поменять фонт по умолчанию на DejaVu)
+
   1. git занести в переменная окружения PATH, перезапустить cmd
-  2. git clone https://github.com/JavaWebinar/webapp.git (где лежит .git)
-  3. git remote -v
-  4. git remote set-url origin https://github.com/JavaWebinar/webapp.git - для pull
-  5. git remote set-url --push origin https://github.com/YouGitHub/YourRepo.git - для push
-  6. git push -u origin master
+  2. Клонировать к себе локально наш проект `git clone https://github.com/JavaWebinar/webapp.git`
+  3. `git remote -v`
+  4. `git remote set-url origin https://github.com/JavaWebinar/webapp.git` - настройка pull
+  5. `git remote set-url --push origin https://github.com/YouGitHub/YourRepo.git` - настройка push
+  6. `git push -u origin master`
 
-- Первое приложение Hello World. Пакеты, импорт пакетов. Commit (commit+push,comments), debug
+### Сегодня выложу остальные видео
 
-- Выполнение ДЗ в ветке: HW1
-    New Branch
-    Code convention
-    Commit + push (master-> origin/master, hw1-> origin/hw1)
-    Checkout master
+## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW01
 
+  - Сделать объектную модель резюме (диаграмма и классы).
+Делать только классы, включаемые в Resume, c полями и без методов.
+Некоторые из объектов схожи по структуре и функциональности: сделать для них один класс.
+Модель упрощаем для хранения только необходимой информации для вывода/ редактирования резюме.
+Resume - главный класс. В него все включается (композиция - строгий вид агрегации).
 
-### 1. ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFUFI0dGh4QjA5U0k" target="_blank">Обзор проекта</a>
+  - В модели резюме должны быть представлены контакты и следующие разделы:
 
-### 2. ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFQ3FLZFFyTXhPUUk" target="_blank">Литература</a>
+    - OBJECTIVE("Позиция")
+    - ACHIEVEMENT("Достижения")
+    - QUALIFICATIONS("Квалификация")
+    - EXPERIENCE("Опыт работы")
+    - EDUCATION("Образование")
 
-<a href="http://javawebinar.ru/books.html">Рекомендуемые книги по Java и разработке ПО</a>
+    В секциях Достижения и Квалификация хранить данные так, чтобы можно было выводить их одним списком.
 
-### 3. ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://www.youtube.com/watch?v=zhPH8Vnidw8">Системы управления версиями. Git.</a>
+  - Учесть в классах модели, что обработка резюме (вывод в html, сохранение, чтение) будет сделано следующим образом:
+обработка уникальных полей, цикл обработки по контактам, цикл обработки по секциям. При добавлении/удалении новых видов контактов или разделов изменения в коде (и БД) должны быть минимальны.
 
-<a href="http://ru.wikipedia.org/wiki/Система_управления_версиями">Система управления версиями</a>. <a
-                    href="http://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F%D0%BC%D0%B8#.D0.A0.D0.B0.D1.81.D0.BF.D1.80.D0.B5.D0.B4.D0.B5.D0.BB.D1.91.D0.BD.D0.BD.D1.8B.D0.B5_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC.D1.8B_.D1.83.D0.BF.D1.80.D0.B0.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D1.8F_.D0.B2.D0.B5.D1.80.D1.81.D0.B8.D1.8F.D0.BC.D0.B8">VCS/DVSC</a>.
+  - Список всех резюме будет выводится с email (или например телефоном) его владельца: должна быть возможность просто достать из модели резюме контакт заданного типа.
 
-- Справичник (читать все НЕ надо, использовать как справочник)
-  -  <a href="https://try.github.io/levels/1/challenges/1">Интерактивная Git обучалка</a>
-  -  <a href="http://githowto.com/ru">Основы Git</a>
-  -  <a href="https://www.youtube.com/playlist?list=PLIU76b8Cjem5B3sufBJ_KFTpKkMEvaTQR">Видео по обучению Git</a>
-  -  <a href="http://habrahabr.ru/post/125799/">Как начать работать с GitHub: быстрый старт</a>
-  -  <a href="http://ndpsoftware.com/git-cheatsheet.html">Справочник в графическом виде</a>
-  -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
-  -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
+  - Учесть, что на одной работе (в одном учебном заведении)
+можно работать/ учиться в разные периоды и при этом имя организации не дублируется.
 
-### 4. ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="http://www.youtube.com/watch?v=stYj2RhjvQ8" target="_blank">Видео по установке ПО (Java, Git, IntelliJ IDEA)</a>
+#### Инструменты для рисования:
 
-**Внимание: клонировать проект нужно из https://github.com/JavaWebinar/webapp**
-
-     git clone https://github.com/JavaWebinar/webapp.git
-     
-- **<a href="http://javawebinar.ru/#/soft">Ссылка на используемое на вебинаре ПО</a>**
-
-### 5. ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFeGtUTDNUdVZaQ3M" target="_blank">Обзор языка Java</a>
-
-- <a href="http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014/">Обзор популярности инструментов и технологий Java за 2014 г.</a>
-- <a href="http://ru.wikipedia.org/wiki/Java">Java</a>, <a href="http://ru.wikipedia.org/wiki/Виртуальная_машина_Java">JVM</a>, <a href="http://ru.wikipedia.org/wiki/JIT">JIT-компиляция</a>
-- <a href="http://ru.wikipedia.org/wiki/Java_Platform,_Micro_Edition">ME</a>, <a href="http://en.wikipedia.org/wiki/Java_Platform,_Standard_Edition">SE</a> (<a href="http://ru.wikipedia.org/wiki/Java_Platform,_Standard_Edition">русский</a>), <a href="http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition">EE (<a href="http://ru.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition">русский</a>)</a>
-- <a href="http://docs.oracle.com/javase/8/docs/index.html">Oracle Java8 Home</a>
-- <a href="http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html">Programming languages TIOBE Index</a>
-
--  Дополнительно:
-  - <a href="http://www.intuit.ru/studies/courses/16/16/lecture/27105">Что такое Java? История создания</a>
-  - <a href="http://ggenikus.github.io/blog/2014/05/04/gc/">Понимаем основы Java garbage collection</a>
-  - <a href="http://www.youtube.com/watch?v=iGRfyhE02lA&list=PLjvY25uoBsUp_V9PnDap_R8g-9vY5hSWF">Владимир Иванов: Garbage Collectors</a>
-
-### Ресурсы для подготовки
--  <a href="http://www.intuit.ru/studies/courses/16/16/info">Интуит. Программирование на Java</a>
--  <a href="https://www.codecademy.com/learn/learn-sql">Learn SQL</a>
--  <a href="http://campus.codeschool.com/courses/try-sql/contents">Try SQL</a>
--  <a href="http://www.intuit.ru/studies/courses/1102/134/info">Основы работы с HTML</a>
--  <a href="http://jeeconf.com/materials/intellij-idea/">Эффективная работа с кодом в IntelliJ IDEA</a>
+- <a href="http://stackoverflow.com/questions/8942751/use-intellij-to-generate-class-diagram#26926334">Generate class diagram in IntelliJ IDEA</a> (<a href="https://www.jetbrains.com/help/idea/2016.1/working-with-diagrams.html?origin=old_help">Help: working with Diagrams</a>)
+- Нарисовать и сфотографировать
+- <a href="http://www.draw.io">Online: www.draw.io</a>
+- <a href="https://www.yworks.com/">yEd - Graph Editor</a>
