@@ -27,6 +27,7 @@
 - <a href="https://ru.wikipedia.org/wiki/Диаграмма_классов#.D0.92.D0.B7.D0.B0.D0.B8.D0.BC.D0.BE.D1.81.D0.B2.D1.8F.D0.B7.D0.B8">Типы отношений между классами: наследование, агрегация, композиция, ассоциация.</a>
 - <a href="http://citforum.ru/programming/oop_rsis/glava2_1_10.shtml">Множественное наследование. Делегирование.</a>
 - Дополнительно:
+  - <a href="https://www.youtube.com/watch?v=G6LJkWwZGuc">Николай Алименков — Парадигмы ООП</a>
   - <a href="http://devcolibri.com/720">Что такое ООП и с чем его едят?</a>
   - <a href="http://ru.wikipedia.org/wiki/Объектно-ориентированное_программирование">Объектно ориентированное программирование</a>
   - <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/blacky0x0/java-docs-ru/master/tutorials/java/concepts/index.html">Концепции объектно-ориентированного программирования</a>
