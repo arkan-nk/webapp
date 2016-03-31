@@ -24,5 +24,5 @@ public class Main {
         Storage storage = new MapStorageImpl();
         storage.getClass();
     }
-    // just to test commit to my repository
+    // --- just to test commit to my repository
 }
