@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ru.javawebinar.model</OriginalElement>
+  <nodes>
+    <node x="185.0" y="139.0">ru.javawebinar.model.JobExperience</node>
+    <node x="-250.0" y="160.0">ru.javawebinar.model.EducationExperience</node>
+    <node x="-13.0" y="368.0">ru.javawebinar.model.Organization</node>
+    <node x="-192.0" y="-157.0">ru.javawebinar.model.Resume</node>
+    <node x="254.0" y="-113.0">ru.javawebinar.model.Contact</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ru.javawebinar.model.Resume" target="ru.javawebinar.model.Contact">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.model.EducationExperience" target="ru.javawebinar.model.Organization">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.model.JobExperience" target="ru.javawebinar.model.Organization">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.model.Resume" target="ru.javawebinar.model.EducationExperience">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.model.Resume" target="ru.javawebinar.model.JobExperience">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="111.5" y="127.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
