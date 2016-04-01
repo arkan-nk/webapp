@@ -32,14 +32,6 @@ public class Resume {
         this.contact = contact;
     }
 
-    public List<String> getLinks() {
-        return links;
-    }
-
-    public void setLinks(List<String> links) {
-        this.links = links;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -72,7 +64,6 @@ public class Resume {
     }
 
     private Contact contact;
-    private List<String> links;
     private String fullName;
     private String objective;
     private Set<String> achievement;
