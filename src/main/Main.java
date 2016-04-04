@@ -1,5 +1,9 @@
 package main;
 
+import ru.javawebinar.webapp.model.Link;
+import ru.javawebinar.webapp.storage.MapStorageImpl;
+import ru.javawebinar.webapp.storage.Storage;
+
 /**
  * User: gkislin
  * Date: 18.06.2014
@@ -11,10 +15,13 @@ public class Main {
      * @param args : program arguments
      */
     public static void main(String[] args) {
-        if (args.length > 0) {
-            System.out.println("Hello " + args[0] + "!");
-        } else {
-            System.out.printf("Hello WebApp");
-        }
+        Link link = new Link("name", "url");
+        link.setName("name2");
+        link.setUrl("ulr2");
+        System.out.println(link.toString());
+        System.out.println(link.getName());
+
+        Storage storage = new MapStorageImpl();
+        storage.getClass();
     }
 }
