@@ -27,6 +27,6 @@ public class Main2 {
         l2.setUrl("2");
         System.out.println(l1);
 
-        Section os = new OrganizationSection(Arrays.asList(new Organization(), new Organization()));
+        //Section os = new OrganizationSection(Arrays.asList(new Organization(), new Organization()));
     }
 }

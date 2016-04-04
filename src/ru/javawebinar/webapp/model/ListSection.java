@@ -7,14 +7,15 @@ import java.util.List;
  * 01.04.2016
  */
 public class ListSection extends Section {
-    public List<String> getLines(){
+    @Override
+    public List<String> getContent(){
         return lines;
     }
     public void setLines(List<String> ll){
         lines=ll;
     }
-    public ListSection(List<String> ls){
-        super(SectionType.MULTILINE);
+    public ListSection(List<String> ls, SectionTitle title){
+        super(SectionType.MULTILINE, title);
         lines =ls;
     }
 

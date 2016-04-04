@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ru.javawebinar.webapp.model</OriginalElement>
+  <nodes>
+    <node x="591.9999999999999" y="514.5">ru.javawebinar.webapp.model.OrganizationSection</node>
+    <node x="265.9999999999999" y="514.5">ru.javawebinar.webapp.model.ListSection</node>
+    <node x="739.7499999999999" y="335.0">ru.javawebinar.webapp.model.Organization</node>
+    <node x="417.2499999999999" y="44.0">ru.javawebinar.webapp.model.SectionTitle</node>
+    <node x="1052.1979166666665" y="493.0">ru.javawebinar.webapp.model.Resume</node>
+    <node x="269.2499999999999" y="89.0">ru.javawebinar.webapp.model.SectionType</node>
+    <node x="1188.4791666666665" y="0.0">ru.javawebinar.webapp.model.ContactType</node>
+    <node x="1124.4479166666665" y="335.0">ru.javawebinar.webapp.model.Contact</node>
+    <node x="673.4791666666666" y="78.0">ru.javawebinar.webapp.model.Position</node>
+    <node x="0.0" y="525.5">ru.javawebinar.webapp.model.TextSection</node>
+    <node x="901.4791666666666" y="55.0">ru.javawebinar.webapp.model.Link</node>
+    <node x="299.7291666666666" y="324.0">ru.javawebinar.webapp.model.Section</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ru.javawebinar.webapp.model.OrganizationSection" target="ru.javawebinar.webapp.model.Organization">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.TextSection" target="ru.javawebinar.webapp.model.Section">
+      <point x="0.0" y="-37.5" />
+      <point x="123.0" y="473.0" />
+      <point x="336.9791666666666" y="473.0" />
+      <point x="-111.75" y="59.5" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Organization" target="ru.javawebinar.webapp.model.Position">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Resume" target="ru.javawebinar.webapp.model.Section">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Organization" target="ru.javawebinar.webapp.model.Link">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Contact" target="ru.javawebinar.webapp.model.ContactType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Section" target="ru.javawebinar.webapp.model.SectionTitle">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Section" target="ru.javawebinar.webapp.model.SectionType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Contact" target="ru.javawebinar.webapp.model.Link">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.Resume" target="ru.javawebinar.webapp.model.Contact">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.ListSection" target="ru.javawebinar.webapp.model.Section">
+      <point x="0.0" y="-48.5" />
+      <point x="413.9999999999999" y="473.0" />
+      <point x="411.4791666666666" y="473.0" />
+      <point x="-37.25" y="59.5" />
+    </edge>
+    <edge source="ru.javawebinar.webapp.model.OrganizationSection" target="ru.javawebinar.webapp.model.Section">
+      <point x="-95.75" y="-48.5" />
+      <point x="687.7499999999999" y="473.0" />
+      <point x="485.9791666666666" y="473.0" />
+      <point x="37.25" y="59.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.626657824933687" x="744.0" y="316.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
