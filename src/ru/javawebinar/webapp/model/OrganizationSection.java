@@ -7,11 +7,15 @@ import java.util.List;
  * 01.04.2016
  */
 public class OrganizationSection extends Section {
-
-    private List<Organization> organizations;
-
+    public List<Organization> getOrganizations(){
+        return organizations;
+    }
+    public void setOrganizations(List<Organization> o){
+        organizations=o;
+    }
     public OrganizationSection(List<Organization> organizations) {
-        super("OrganizationSection");
+        super(SectionType.ORGANIZATION);
         this.organizations = organizations;
     }
+    private List<Organization> organizations;
 }
