@@ -5,10 +5,16 @@ package ru.javawebinar.webapp.model;
  * 29.03.2016
  */
 public class Link {
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private String url;
 
     public Link() {
+    }
+
+    public Link(Link link) {
+        this(link.name, link.url);
     }
 
     public Link(String name, String url) {

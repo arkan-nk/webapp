@@ -9,8 +9,8 @@ import java.util.Set;
  * 29.03.2016
  */
 public class Resume {
-    List<String> list;
-    Set<String> set;
-    Map<String, Link> map;
-    String fullName;
+    private String fullName;
+    private String about;
+    private List<Contact> contacts;
+    private List<Section> sections;
 }
