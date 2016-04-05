@@ -1,26 +1,28 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * GKislin
  * 29.03.2016
  */
 public class Resume {
-    public String getFullName(){
+    public String getFullName() {
         return fullName;
     }
-    public String getAbout(){
+
+    public String getAbout() {
         return about;
     }
-    public List<Contact> getContacts(){
+
+    public Map<Integer, Contact> getContacts() {
         return contacts;
     }
-    public List<Section> getSection(){
+
+    public Map<Integer, Section> getSection() {
         return sections;
     }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -29,16 +31,16 @@ public class Resume {
         this.about = about;
     }
 
-    public void setContacts(List<Contact> contacts) {
+    public void setContacts(Map<Integer, Contact> contacts) {
         this.contacts = contacts;
     }
 
-    public void setSections(List<Section> sections) {
+    public void setSections(Map<Integer, Section> sections) {
         this.sections = sections;
     }
 
     private String fullName;
     private String about;
-    private List<Contact> contacts;
-    private List<Section> sections;
+    private Map<Integer, Contact> contacts;
+    private Map<Integer, Section> sections;
 }

@@ -9,15 +9,18 @@ import java.util.List;
  */
 public class TextSection extends Section {
     @Override
-    public List<String> getContent(){
-        return Arrays.asList(new String[]{content});
+    public List<String> getContent() {
+        return Arrays.asList(content);
     }
-    public void setContent(String c){
+
+    public void setContent(String c) {
         content = c;
     }
+
     public TextSection(String content, SectionTitle title) {
-        super(SectionType.ONELINE, title);
+        super(title);
         this.content = content;
     }
+
     private String content;
 }

@@ -4,10 +4,8 @@ import ru.javawebinar.webapp.model.*;
 import ru.javawebinar.webapp.storage.MapStorageImpl;
 import ru.javawebinar.webapp.storage.Storage;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Arrays.asList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * User: gkislin
@@ -23,38 +21,23 @@ public class Main {
         Resume resume = new Resume();
         resume.setFullName("Василий Чапаев");
         resume.setAbout("персонаж");
-        Contact[] contactArray = new Contact[]{
-            new Contact(ContactType.LOCATION, new Link("Дно реки Урал",null)),
-            new Contact(ContactType.CELLPHONE, new Link("Motorolla RAZR V3",null)),
-            new Contact(ContactType.EMAILHOME, new Link("", "zhena@jizni.net"))
-        };
-        List<Contact> contactList = Arrays.asList(contactArray);
-        resume.setContacts(contactList);
-        Section[] sectionArray = new Section[]{
-            new TextSection("Командующий дивизией", SectionTitle.OBJECTIVE)
-        };
-        List<Section> sectionList= asList(sectionArray);
-        resume.setSections(sectionList);
+        Map<Integer, Contact> contactMap = new TreeMap<Integer, Contact>();
+        contactMap.put(ContactType.LOCATION.ordinal(), new Contact(ContactType.LOCATION, new Link("Дно реки Урал", null)));
+        contactMap.put(ContactType.CELLPHONE.ordinal(), new Contact(ContactType.CELLPHONE, new Link("Motorolla RAZR V3", null)));
+        contactMap.put(ContactType.EMAILHOME.ordinal(), new Contact(ContactType.EMAILHOME, new Link("", "zhena@jizni.net")));
+        resume.setContacts(contactMap);
+        Map<Integer, Section> sectionMap = new TreeMap<Integer, Section>();
+        sectionMap.put(SectionTitle.OBJECTIVE.ordinal(), new TextSection("Командующий дивизией", SectionTitle.OBJECTIVE));
+        resume.setSections(sectionMap);
 
         System.out.println(resume.getFullName());
         System.out.println(resume.getAbout());
 
-        for (Contact contactIt : resume.getContacts()){
-            if (contactIt.getContactType()==ContactType.EMAILHOME) {
-                System.out.println(contactIt.getContactType().getCaption() + ": " + contactIt.getValue().getUrl());
-                break;
-            }
+        Contact emailContact = resume.getContacts().get(ContactType.EMAILHOME.ordinal());
+        System.out.println(emailContact.getContactType().getCaption() + ":" + emailContact.getValue().getUrl());
+        for (String contentLine : resume.getSection().get(SectionTitle.OBJECTIVE.ordinal()).getContent()) {
+            System.out.println(contentLine);
         }
-        for (Section sect : resume.getSection()){
-            if (sect.getSectionType()==SectionType.ONELINE && sect.getSectionTitle()==SectionTitle.OBJECTIVE){
-                System.out.print(sect.getSectionTitle().getTitle() + ": ");
-                for (String str : sect.getContent()) {
-                    System.out.println(str);
-                }
-                break;
-            }
-        }
-
         /*
         Link link = new Link("name", "url");
         link.setName("name2");

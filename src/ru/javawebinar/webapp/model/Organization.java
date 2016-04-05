@@ -23,10 +23,12 @@ public class Organization {
     public void setPositions(List<Position> positions) {
         this.positions = positions;
     }
-    public Organization(Link hp, List<Position> lp){
-        homePage=hp;
-        positions=lp;
+
+    public Organization(Link hp, List<Position> lp) {
+        homePage = hp;
+        positions = lp;
     }
+
     private Link homePage;
     private List<Position> positions;
 }

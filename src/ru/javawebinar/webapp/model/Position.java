@@ -34,9 +34,11 @@ public class Position {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     private Date startDate;
     private Date endDate;
     private String title;

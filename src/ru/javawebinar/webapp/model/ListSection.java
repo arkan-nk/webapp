@@ -8,15 +8,17 @@ import java.util.List;
  */
 public class ListSection extends Section {
     @Override
-    public List<String> getContent(){
+    public List<String> getContent() {
         return lines;
     }
-    public void setLines(List<String> ll){
-        lines=ll;
+
+    public void setLines(List<String> ll) {
+        lines = ll;
     }
-    public ListSection(List<String> ls, SectionTitle title){
-        super(SectionType.MULTILINE, title);
-        lines =ls;
+
+    public ListSection(List<String> ls, SectionTitle title) {
+        super(title);
+        lines = ls;
     }
 
     private List<String> lines;
