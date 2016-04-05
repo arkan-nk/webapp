@@ -19,6 +19,10 @@ public enum SectionTitle {
         return title;
     }
 
+    public SectionType getType() {
+        return type;
+    }
+
     private String title;
     private SectionType type;
 }
