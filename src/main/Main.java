@@ -4,6 +4,7 @@ import ru.javawebinar.webapp.model.*;
 import ru.javawebinar.webapp.storage.MapStorageImpl;
 import ru.javawebinar.webapp.storage.Storage;
 
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,21 +22,21 @@ public class Main {
         Resume resume = new Resume();
         resume.setFullName("Василий Чапаев");
         resume.setAbout("персонаж");
-        Map<Integer, Contact> contactMap = new TreeMap<Integer, Contact>();
-        contactMap.put(ContactType.LOCATION.ordinal(), new Contact(ContactType.LOCATION, new Link("Дно реки Урал", null)));
-        contactMap.put(ContactType.CELLPHONE.ordinal(), new Contact(ContactType.CELLPHONE, new Link("Motorolla RAZR V3", null)));
-        contactMap.put(ContactType.EMAILHOME.ordinal(), new Contact(ContactType.EMAILHOME, new Link("", "zhena@jizni.net")));
+        Map<ContactType, Contact> contactMap = new EnumMap<ContactType, Contact>(ContactType.class);
+        contactMap.put(ContactType.LOCATION, new Contact(ContactType.LOCATION, new Link("Дно реки Урал", null)));
+        contactMap.put(ContactType.CELLPHONE, new Contact(ContactType.CELLPHONE, new Link("Motorolla RAZR V3", null)));
+        contactMap.put(ContactType.EMAILHOME, new Contact(ContactType.EMAILHOME, new Link("", "zhena@jizni.net")));
         resume.setContacts(contactMap);
-        Map<Integer, Section> sectionMap = new TreeMap<Integer, Section>();
-        sectionMap.put(SectionTitle.OBJECTIVE.ordinal(), new TextSection("Командующий дивизией", SectionTitle.OBJECTIVE));
+        Map<SectionTitle, Section> sectionMap = new EnumMap<SectionTitle, Section>(SectionTitle.class);
+        sectionMap.put(SectionTitle.OBJECTIVE, new TextSection("Командующий дивизией", SectionTitle.OBJECTIVE));
         resume.setSections(sectionMap);
 
         System.out.println(resume.getFullName());
         System.out.println(resume.getAbout());
 
-        Contact emailContact = resume.getContacts().get(ContactType.EMAILHOME.ordinal());
+        Contact emailContact = resume.getContacts().get(ContactType.EMAILHOME);
         System.out.println(emailContact.getContactType().getCaption() + ":" + emailContact.getValue().getUrl());
-        for (String contentLine : resume.getSection().get(SectionTitle.OBJECTIVE.ordinal()).getContent()) {
+        for (String contentLine : resume.getSection().get(SectionTitle.OBJECTIVE).getContent()) {
             System.out.println(contentLine);
         }
         /*

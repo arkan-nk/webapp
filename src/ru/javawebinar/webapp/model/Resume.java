@@ -15,11 +15,11 @@ public class Resume {
         return about;
     }
 
-    public Map<Integer, Contact> getContacts() {
+    public Map<ContactType, Contact> getContacts() {
         return contacts;
     }
 
-    public Map<Integer, Section> getSection() {
+    public Map<SectionTitle, Section> getSection() {
         return sections;
     }
 
@@ -31,16 +31,16 @@ public class Resume {
         this.about = about;
     }
 
-    public void setContacts(Map<Integer, Contact> contacts) {
+    public void setContacts(Map<ContactType, Contact> contacts) {
         this.contacts = contacts;
     }
 
-    public void setSections(Map<Integer, Section> sections) {
+    public void setSections(Map<SectionTitle, Section> sections) {
         this.sections = sections;
     }
 
     private String fullName;
     private String about;
-    private Map<Integer, Contact> contacts;
-    private Map<Integer, Section> sections;
+    private Map<ContactType, Contact> contacts;
+    private Map<SectionTitle, Section> sections;
 }
