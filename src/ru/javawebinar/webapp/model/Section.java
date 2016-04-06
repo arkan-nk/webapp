@@ -7,18 +7,14 @@ import java.util.List;
  * 01.04.2016
  */
 public abstract class Section {
-    //TODO it's need refactoring because
-    // OrganizationSection has sophisticated structure
-    // List<String> can't satisfy it
-    public abstract List<String> getContent();
 
-    public SectionTitle getSectionTitle() {
+    public SectionType getSectionTitle() {
         return title;
     }
 
-    protected Section(SectionTitle title) {
+    protected Section(SectionType title) {
         this.title = title;
     }
 
-    private final SectionTitle title;
+    private final SectionType title;
 }

@@ -7,18 +7,21 @@ import java.util.List;
  * 01.04.2016
  */
 public class ListSection extends Section {
-    @Override
-    public List<String> getContent() {
-        return lines;
-    }
 
     public void setLines(List<String> ll) {
         lines = ll;
     }
 
-    public ListSection(List<String> ls, SectionTitle title) {
+    public ListSection(List<String> ls, SectionType title) {
         super(title);
         lines = ls;
+    }
+
+    @Override
+    public String toString() {
+        return "ListSection{" +
+                "lines=" + lines.toString() +
+                '}';
     }
 
     private List<String> lines;

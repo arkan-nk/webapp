@@ -1,12 +1,60 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * GKislin
  * 29.03.2016
  */
-public class Resume {
+public class Resume implements Comparable<Resume> {
+
+    public void addContact(ContactType type, Link value) {
+        contacts.add(new Contact(type, value));
+    }
+
+    public void addSection(Section section) {
+        sections.add(section);
+    }
+
+    @Override //TODO collision in comparison of strings
+    public int compareTo(Resume re) {
+        return fullName.compareTo(re.fullName);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Resume)) return false;
+
+        Resume resume = (Resume) o;
+
+        if (!uuid.equals(resume.uuid)) return false;
+        return fullName.equals(resume.fullName);
+
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = uuid.hashCode();
+        result = 31 * result + fullName.hashCode();
+        return result;
+    }
+
+    public Resume(String fN, String ab) {
+        this(UUID.randomUUID(), fN, ab);
+    }
+
+    public Resume(UUID uuid1, String fN, String ab) {
+        Objects.requireNonNull(uuid1, "UUID must not be null");
+        Objects.requireNonNull(fN, "fullName must not be null");
+        uuid = uuid1;
+        fullName = fN;
+        about = ab;
+        contacts = new ArrayList<>();
+        sections = new ArrayList<>();
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -15,32 +63,21 @@ public class Resume {
         return about;
     }
 
-    public Map<ContactType, Contact> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
-    public Map<SectionTitle, Section> getSection() {
+    public List<Section> getSection() {
         return sections;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
-    public void setAbout(String about) {
-        this.about = about;
-    }
-
-    public void setContacts(Map<ContactType, Contact> contacts) {
-        this.contacts = contacts;
-    }
-
-    public void setSections(Map<SectionTitle, Section> sections) {
-        this.sections = sections;
-    }
-
+    private final UUID uuid;
     private String fullName;
     private String about;
-    private Map<ContactType, Contact> contacts;
-    private Map<SectionTitle, Section> sections;
+    private List<Contact> contacts;
+    private List<Section> sections;
+
+    //private Map<ContactType, Contact> contacts;
+    //private Map<SectionType, Section> sections;
 }

@@ -6,9 +6,13 @@ import java.util.Collection;
 
 /**
  * GKislin
- * 29.03.2016
+ * 05.04.2016
  */
-public abstract class MapStorageImpl implements Storage {
+// TODO implement
+public class ArrayStorageImpl implements Storage {
+    private static final int ARRAY_LIMIT = 1000;
+
+    private Resume[] array = new Resume[ARRAY_LIMIT];
 
     @Override
     public void clear() {

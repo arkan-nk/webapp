@@ -6,10 +6,9 @@ import java.util.Collection;
 
 /**
  * GKislin
- * 29.03.2016
+ * 05.04.2016
  */
-public abstract class MapStorageImpl implements Storage {
-
+public class SortedArrayStorageImpl implements Storage{
     @Override
     public void clear() {
 

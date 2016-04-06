@@ -5,17 +5,17 @@ package ru.javawebinar.webapp.model;
  * Created by arkan on 04.04.2016.
  */
 public enum ContactType {
-    LOCATION("Проживание"), CELLPHONE("Тел."), EMAILHOME("e-mail"), SKYPE("skype"),
-    HABRPROFILE("Habrhabr"), STACKOVFPROFILE("stackoverflow"), GITHUBACC("github"),
-    LINKEDLNPROFILE("LinkedIn");
+    LOCATION("Проживание"), CELLPHONE("Мобильный тел."), EMAILHOME("e-mail"), SKYPE("skype"),
+    HOME_PAGE("Homepage"), HABRPROFILE("Habrhabr"), STACKOVFPROFILE("stackoverflow"),
+    GITHUBACC("github"), LINKEDLNPROFILE("LinkedIn");
 
-    ContactType(String caption1) {
-        caption = caption1;
+    ContactType(String title1) {
+        title = title1;
     }
 
-    public String getCaption() {
-        return caption;
+    public String getTitle() {
+        return title;
     }
 
-    private String caption;
+    private String title;
 }

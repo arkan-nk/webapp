@@ -8,16 +8,19 @@ import java.util.List;
  * 01.04.2016
  */
 public class TextSection extends Section {
-    @Override
-    public List<String> getContent() {
-        return Arrays.asList(content);
-    }
 
     public void setContent(String c) {
         content = c;
     }
 
-    public TextSection(String content, SectionTitle title) {
+    @Override
+    public String toString() {
+        return "TextSection{" +
+                "content='" + content + '\'' +
+                '}';
+    }
+
+    public TextSection(String content, SectionType title) {
         super(title);
         this.content = content;
     }

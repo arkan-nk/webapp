@@ -8,10 +8,6 @@ import java.util.List;
  * 01.04.2016
  */
 public class OrganizationSection extends Section {
-    @Override //TODO need to implements correctly
-    public List<String> getContent() {
-        return Arrays.asList(organizations.toString());
-    }
 
     public List<Organization> getOrganizations() {
         return organizations;
@@ -21,7 +17,7 @@ public class OrganizationSection extends Section {
         organizations = o;
     }
 
-    public OrganizationSection(List<Organization> organizations, SectionTitle title) {
+    public OrganizationSection(List<Organization> organizations, SectionType title) {
         super(title);
         this.organizations = organizations;
     }
