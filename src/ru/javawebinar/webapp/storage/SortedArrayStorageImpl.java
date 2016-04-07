@@ -33,13 +33,13 @@ public class SortedArrayStorageImpl implements Storage {
         }
         if (count<2) {
             int comResult = comparator.compare(array[0], r);
-            if (comResult<=0) array[0]=r;
+            if (comResult==0) array[0]=r;
+            if (comResult<0) array[1]=r;
             if (comResult>0) {
-                array[1] = array[0];
-                array[0] = r;
+                array[1]=array[0];
+                array[0]=r;
             }
-            if (comResult<0) array[1] = r;
-            if (comResult!=0) count++;
+            if(comResult!=0) count++;
             return;
         }
         int start = 0;
@@ -101,6 +101,7 @@ public class SortedArrayStorageImpl implements Storage {
         if (index<0) return;
         Resume[] tailArray = Arrays.copyOfRange(array, index+1, count - 1);
         if (index==0) {
+            array = new Resume[ARRAY_LIMIT];
             System.arraycopy(tailArray, 0, array, 0, tailArray.length);
         }else {
             Resume[] headArray = Arrays.copyOfRange(array, 0, index - 1);

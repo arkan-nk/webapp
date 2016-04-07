@@ -1,7 +1,7 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.model.ResumeFullNameComparator;
 import ru.javawebinar.webapp.model.Resume;
+import ru.javawebinar.webapp.model.ResumeUuidComparator;
 
 import java.util.*;
 
@@ -9,7 +9,6 @@ import java.util.*;
  * GKislin
  * 05.04.2016
  */
-// TODO implement
 public class ArrayStorageImpl implements Storage {
     private static final int ARRAY_LIMIT = 1000;
     private int count=0;
@@ -48,7 +47,7 @@ public class ArrayStorageImpl implements Storage {
         boolean toUpdate = false;
         int index = 0;
         for (Resume res :array) {
-            toUpdate = (res!=null && res.getUuid().equals(r.getUuid()));
+            toUpdate = (res!=null && r.getUuid().equals(res.getUuid()));
             if (toUpdate) break;
             index++;
         }
@@ -61,7 +60,7 @@ public class ArrayStorageImpl implements Storage {
         Resume result = null;
         UUID uuidReal = UUID.fromString(uuid);
         for (Resume res :array) {
-            if (res.getUUid().equals(uuidReal)) {
+            if (uuidReal.equals(res.getUUid())) {
                 result = res; break;
             }
         }
@@ -74,7 +73,7 @@ public class ArrayStorageImpl implements Storage {
         UUID uuidReal = UUID.fromString(uuid);
         int index = 0; boolean found = false;
         for (Resume res :array) {
-            found = res.getUuid().equals(uuidReal);
+            found = uuidReal.equals(res.getUuid());
             if (found) break;
             index++;
         }
@@ -83,10 +82,14 @@ public class ArrayStorageImpl implements Storage {
 
     @Override
     public Collection<Resume> getAllSorted() {
-        if (array.length<1) return null;
+        if (count<1) return new ArrayList<>();
         List<Resume> col = Arrays.asList(array);
-        Collections.sort(col, new ResumeFullNameComparator());
-        return col;
+        ArrayList<Resume> arr = new ArrayList<Resume>();
+        arr.addAll(col);
+        Collection<Resume> nulls =  Collections.singleton(null);
+        boolean b = arr.removeAll(nulls);
+        if (count>1) Collections.sort(arr, new ResumeUuidComparator());
+        return arr;
     }
 
     @Override
