@@ -29,12 +29,11 @@ public class ArrayStorageImpl implements Storage {
         int index=0;
         boolean toUpdate = false;
         boolean toInsert = false;
-        for (Resume res :array) {
+        for (Resume res : array) {
             toUpdate = (res!=null && res.getUuid().equals(r.getUuid()));
             if (toUpdate) break;
             toInsert = (res==null);
             if (toInsert && indexNull<0) indexNull=index;
-            index++;
         }
         if (toUpdate) {array[index]=r; return;}
         if (toInsert) {count++; array[indexNull]=r;}
@@ -87,7 +86,7 @@ public class ArrayStorageImpl implements Storage {
         ArrayList<Resume> arr = new ArrayList<Resume>();
         arr.addAll(col);
         Collection<Resume> nulls =  Collections.singleton(null);
-        boolean b = arr.removeAll(nulls);
+        arr.removeAll(nulls);
         if (count>1) Collections.sort(arr, new ResumeUuidComparator());
         return arr;
     }
