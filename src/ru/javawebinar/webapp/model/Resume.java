@@ -6,10 +6,7 @@ import java.util.*;
  * GKislin
  * 29.03.2016
  */
-public class Resume implements Comparable<Resume> {
-    public Resume() {
-        uuid = null;
-    }
+public class Resume {
 
     public OrganizationSection getOrganizationSection(SectionType st) {
         Collections.sort(sections, new SectionComapartor());
@@ -27,10 +24,7 @@ public class Resume implements Comparable<Resume> {
         sections.add(section);
     }
 
-    @Override //TODO collision in comparison of strings
-    public int compareTo(Resume re) {
-        return fullName.compareTo(re.fullName);
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -65,8 +59,11 @@ public class Resume implements Comparable<Resume> {
         contacts = new ArrayList<>();
         sections = new ArrayList<>();
     }
-    public UUID getUuid(){
+    public UUID getUUid(){
         return uuid;
+    }
+    public String getUuid(){
+        return uuid.toString();
     }
 
     public String getFullName() {

@@ -5,9 +5,9 @@ import java.util.Comparator;
 /**
  * Created by arkan on 07.04.2016.
  */
-public class ResumeFullNameComparator implements Comparator<Resume> {
+public class ResumeUuidComparator implements Comparator<Resume> {
     @Override
     public int compare(Resume o1, Resume o2) {
-        return o1.getFullName().compareTo(o2.getFullName());
+        return o1.getUUid().compareTo(o2.getUUid());
     }
 }

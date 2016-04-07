@@ -1,6 +1,9 @@
 package main;
 
 import ru.javawebinar.webapp.model.*;
+import ru.javawebinar.webapp.storage.ArrayStorageImpl;
+import ru.javawebinar.webapp.storage.SortedArrayStorageImpl;
+import ru.javawebinar.webapp.storage.Storage;
 
 import java.util.*;
 
@@ -9,8 +12,28 @@ import java.util.*;
  * 05.04.2016
  */
 public class MainArrayStorage {
-    // TODO add OrganizationSection
+
     public static void main(String[] args) {
+        Resume resume = makeResume();
+        String uuid = resume.getUuid();
+        Storage storage = new ArrayStorageImpl();
+        storage.clear();
+        storage.save(resume);
+        Resume res1 = storage.get(uuid);
+        System.out.println(res1.equals(resume));
+        System.out.println(res1 == resume);
+        System.out.println(storage.size());
+
+        Storage storageSort = new SortedArrayStorageImpl();
+        storageSort.save(resume);
+        Resume r2 = storageSort.get(uuid);
+        System.out.println(storageSort.size());
+        storageSort.delete(uuid);
+        System.out.println(storage.size());
+
+    }
+
+    private static Resume makeResume(){
         Resume r1 = new Resume("Полное Имя1", "About1");
         r1.addContact(ContactType.EMAILHOME, new Link(null, "mail1@ya.ru"));
         r1.addContact(ContactType.CELLPHONE, new Link("11111", null));
@@ -43,8 +66,6 @@ public class MainArrayStorage {
         eduSection.addOrganization(new Organization("Как будто где-то учился", "www.kbgu.edu"), sd1, fd1, "Студент", "двоечник");
 
         workSection.addOrganization(new Organization("Рога Копыта", "www.kapetc.org"), sd2, fd2, "Младший помощник", "Старшего дворника");
-
-
-        // TODO test ArrayStorageImpl
+        return r1;
     }
 }

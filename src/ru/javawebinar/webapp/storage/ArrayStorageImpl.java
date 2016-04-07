@@ -61,7 +61,7 @@ public class ArrayStorageImpl implements Storage {
         Resume result = null;
         UUID uuidReal = UUID.fromString(uuid);
         for (Resume res :array) {
-            if (res.getUuid().equals(uuidReal)) {
+            if (res.getUUid().equals(uuidReal)) {
                 result = res; break;
             }
         }
