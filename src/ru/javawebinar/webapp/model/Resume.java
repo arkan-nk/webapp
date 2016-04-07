@@ -7,6 +7,17 @@ import java.util.*;
  * 29.03.2016
  */
 public class Resume implements Comparable<Resume> {
+    public Resume() {
+        uuid = null;
+    }
+
+    public OrganizationSection getOrganizationSection(SectionType st) {
+        Collections.sort(sections, new SectionComapartor());
+        Section section = new OrganizationSection(st);
+        int index = Collections.binarySearch(sections, section);
+        if (index < 0) return null;
+        return (OrganizationSection) sections.get(index);
+    }
 
     public void addContact(ContactType type, Link value) {
         contacts.add(new Contact(type, value));
@@ -53,6 +64,9 @@ public class Resume implements Comparable<Resume> {
         about = ab;
         contacts = new ArrayList<>();
         sections = new ArrayList<>();
+    }
+    public UUID getUuid(){
+        return uuid;
     }
 
     public String getFullName() {

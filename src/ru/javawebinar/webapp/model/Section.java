@@ -6,7 +6,7 @@ import java.util.List;
  * GKislin
  * 01.04.2016
  */
-public abstract class Section {
+public abstract class Section implements Comparable<Section> {
 
     public SectionType getSectionTitle() {
         return title;
@@ -17,4 +17,8 @@ public abstract class Section {
     }
 
     private final SectionType title;
+
+    public int compareTo(Section s) {
+        return title.compareTo(s.getSectionTitle());
+    }
 }
