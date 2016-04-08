@@ -23,7 +23,7 @@ public class ArrayStorageImpl implements Storage {
 
     @Override
     public void save(Resume r) {
-        assert count<=ARRAY_LIMIT;
+        assert count<ARRAY_LIMIT;
         Objects.requireNonNull(r);
         int indexNull = -1;
         int index=0;
@@ -43,14 +43,8 @@ public class ArrayStorageImpl implements Storage {
     @Override
     public void update(Resume r) {
         Objects.requireNonNull(r);
-        boolean toUpdate = false;
-        int index = 0;
-        for (Resume res :array) {
-            toUpdate = (res!=null && r.getUuid().equals(res.getUuid()));
-            if (toUpdate) break;
-            index++;
-        }
-        if (toUpdate) array[index]=r;
+        int index = findIndex(r.getUUid());
+        if (index>-1) array[index]=r;
     }
 
     @Override
@@ -58,11 +52,8 @@ public class ArrayStorageImpl implements Storage {
         Objects.requireNonNull(uuid);
         Resume result = null;
         UUID uuidReal = UUID.fromString(uuid);
-        for (Resume res :array) {
-            if (uuidReal.equals(res.getUUid())) {
-                result = res; break;
-            }
-        }
+        int index = findIndex(uuidReal);
+        if (index>-1) result = array[index];
         return result;
     }
 
@@ -70,13 +61,8 @@ public class ArrayStorageImpl implements Storage {
     public void delete(String uuid) {
         Objects.requireNonNull(uuid);
         UUID uuidReal = UUID.fromString(uuid);
-        int index = 0; boolean found = false;
-        for (Resume res :array) {
-            found = uuidReal.equals(res.getUuid());
-            if (found) break;
-            index++;
-        }
-        if (found) {array[index]= null; count--;}
+        int index = findIndex(uuidReal);
+        if (index>-1) {array[index]= null; count--;}
     }
 
     @Override
@@ -86,13 +72,24 @@ public class ArrayStorageImpl implements Storage {
         ArrayList<Resume> arr = new ArrayList<Resume>();
         arr.addAll(col);
         Collection<Resume> nulls =  Collections.singleton(null);
-        arr.removeAll(nulls);
-        if (count>1) Collections.sort(arr, new ResumeUuidComparator());
+        arr.remove(nulls);
+        Collections.sort(arr, new ResumeUuidComparator());
         return arr;
     }
 
     @Override
     public int size() {
         return count;
+    }
+
+    private int findIndex(UUID uuidReal){
+        int index = 0;
+        boolean found = false;
+        for (Resume res :array) {
+            found = (uuidReal.equals(res.getUuid()));
+            if (found) break;
+            index++;
+        }
+        return found ? index : -1;
     }
 }

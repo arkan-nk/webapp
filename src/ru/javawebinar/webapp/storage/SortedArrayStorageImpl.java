@@ -67,7 +67,7 @@ public class SortedArrayStorageImpl implements Storage {
     @Override
     public void update(Resume r) {
         Objects.requireNonNull(r);
-        if (count>1) Arrays.sort(array, comparator);
+        //if (count>1) Arrays.sort(array, comparator);
         int start = Arrays.binarySearch(array, r, comparator);
         if (start>0) array[start] = r; else array[count++]=r;
     }
@@ -79,7 +79,7 @@ public class SortedArrayStorageImpl implements Storage {
         if (count<2) {
             if (array[0].getUUid().equals(realUid)) return array[0]; else return null;
         }
-        Arrays.sort(array, comparator);
+        //Arrays.sort(array, comparator);
         int index = Arrays.binarySearch(array, new Resume(realUid, "no", null), comparator);
         if (index < 0) return null;
         return array[index];
@@ -96,7 +96,6 @@ public class SortedArrayStorageImpl implements Storage {
             }
             return;
         }
-        Arrays.sort(array, comparator);
         int index = Arrays.binarySearch(array, new Resume(realUid, "no", null), comparator);
         if (index<0) return;
         Resume[] tailArray = Arrays.copyOfRange(array, index+1, count - 1);
@@ -116,8 +115,8 @@ public class SortedArrayStorageImpl implements Storage {
 
     @Override
     public Collection<Resume> getAllSorted() {
-        Arrays.sort(array, comparator);
-        List<Resume> resumeList = Arrays.asList(array);
+        Resume[] subarray = Arrays.copyOfRange(array, 0, count-1);
+        List<Resume> resumeList = Arrays.asList(subarray);
         return resumeList;
     }
 
