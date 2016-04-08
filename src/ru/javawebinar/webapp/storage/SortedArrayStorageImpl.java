@@ -23,6 +23,8 @@ public class SortedArrayStorageImpl implements Storage {
 
 
     @Override
+    //TODO read please
+    //http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
     public void save(Resume r) {
         Objects.requireNonNull(r);
         assert count < ARRAY_LIMIT;
