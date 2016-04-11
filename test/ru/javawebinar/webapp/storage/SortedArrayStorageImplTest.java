@@ -19,7 +19,7 @@ public class SortedArrayStorageImplTest {
     private LocalTime time0;
     private LocalTime time1;
 
-    static SortedArrayStorageImpl storage;
+    private static SortedArrayStorageImpl storage;
 
     public SortedArrayStorageImplTest() {
     }
