@@ -15,7 +15,7 @@ import static ru.javawebinar.webapp.ResumeTestData.*;
  * 08.04.2016
  */
 public class ArrayStorageImplTest {
-    static Storage storage;
+    private static Storage storage;
     private LocalTime time0;
     private LocalTime time1;
 
