@@ -8,24 +8,26 @@ import ru.javawebinar.webapp.model.Resume;
 import java.time.LocalTime;
 import java.util.Collection;
 
-import static ru.javawebinar.webapp.ResumeTestData.*;
+import static ru.javawebinar.webapp.ResumeTestData.R1;
+import static ru.javawebinar.webapp.ResumeTestData.R2;
+import static ru.javawebinar.webapp.ResumeTestData.R3;
 
 /**
- * GKislin
- * 08.04.2016
+ * Created by user on 11.04.2016.
  */
-public class ArrayStorageImplTest {
-    static Storage storage;
+public class SortedArrayStorageImplTest {
     private LocalTime time0;
     private LocalTime time1;
 
+    static SortedArrayStorageImpl storage;
 
-    public ArrayStorageImplTest() {
+    public SortedArrayStorageImplTest() {
     }
+
 
     @BeforeClass
     public static void beforeClass() {
-        storage = new ArrayStorageImpl();
+        storage = new SortedArrayStorageImpl();
         System.out.println("beforeClass");
     }
 
@@ -58,8 +60,8 @@ public class ArrayStorageImplTest {
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void saveOver() {
         int fillNum = storage.size();
-        for (int i=fillNum; i<50000; i++) {
-            Resume r = new Resume("test"+i, "test"+i);
+        for (int i = fillNum; i < 50000; i++) {
+            Resume r = new Resume("test" + i, "test" + i);
             storage.save(r);
         }
         Resume rMax = new Resume("FFrfq", "trye");
@@ -86,8 +88,9 @@ public class ArrayStorageImplTest {
         storage.delete(R3.getUuid());
         Assert.assertEquals(storage.size(), 2);
     }
+
     @Test(expected = ResumeException.class)
-    public void getDeleted() throws Exception{
+    public void getDeleted() throws Exception {
         storage.delete(R3.getUuid());
         storage.get(R3.getUuid());
     }
@@ -103,5 +106,4 @@ public class ArrayStorageImplTest {
     public void size() throws Exception {
         Assert.assertEquals(3, storage.size());
     }
-
 }

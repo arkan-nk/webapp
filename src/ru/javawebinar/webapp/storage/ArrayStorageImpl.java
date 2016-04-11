@@ -25,8 +25,8 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
     @Override
     public void save(Resume r) {
         Objects.requireNonNull(r);
+        if (size>=ARRAY_LIMIT-1) throw new ArrayIndexOutOfBoundsException("Storage are full");
         int index = getIndex(r.getUUid());
-        if (index>=ARRAY_LIMIT) throw new ArrayIndexOutOfBoundsException("Storage are full");
         if (index>=0) throw new IllegalArgumentException("Resume already exists");
         array[size++] = r;
     }
