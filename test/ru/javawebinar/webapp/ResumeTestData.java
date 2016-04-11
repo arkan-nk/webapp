@@ -14,16 +14,14 @@ public class ResumeTestData {
     public static Resume R2;
     public static Resume R3;
 
-    public static String UUID1;
-
     public static void init() {
         R1 = new Resume("Полное Имя1", "About1");
         R2 = new Resume("Полное Имя2", "About2");
         R3 = new Resume("Полное Имя3", "About3");
-        R1.addContact(ContactType.EMAILHOME, new Link(null,"mail1@ya.ru"));
-        R1.addContact(ContactType.CELLPHONE, new Link("11111",null));
-        R1.addContact(ContactType.SKYPE, new Link(null, "skype2"));
-        R1.addContact(ContactType.HABRPROFILE, new Link(null, "22222"));
+        R1.addContact(ContactType.EMAILHOME, new Link(null, "mail1@ya.ru"));
+        R1.addContact(ContactType.CELLPHONE, new Link("11111", null));
+        R1.addContact(ContactType.SKYPE, new Link(null, "skype1"));
+        R1.addContact(ContactType.HABRPROFILE, new Link(null, "22221"));
         R1.addSection(new TextSection("Objective1", SectionType.OBJECTIVE));
         R1.addSection(new ListSection(Arrays.asList("Achivment11", "Achivment12"), SectionType.ACHIEVEMENT));
         R1.addSection(new ListSection(Arrays.asList("Java", "SQL"), SectionType.QUALIFICATIONS));
@@ -36,8 +34,8 @@ public class ResumeTestData {
         R1.addSection(os1);
         R1.addSection(os2);
 
-        R2.addContact(ContactType.EMAILHOME, new Link(null,"mail1@ya.ru"));
-        R2.addContact(ContactType.CELLPHONE, new Link("11111",null));
+        R2.addContact(ContactType.EMAILHOME, new Link(null, "mail2@ya.ru"));
+        R2.addContact(ContactType.CELLPHONE, new Link("11112", null));
         R2.addContact(ContactType.SKYPE, new Link(null, "skype2"));
         R2.addContact(ContactType.HABRPROFILE, new Link(null, "22222"));
         R2.addSection(new TextSection("Objective1", SectionType.OBJECTIVE));
@@ -52,10 +50,10 @@ public class ResumeTestData {
         R2.addSection(os3);
         R2.addSection(os4);
         //UUID1 = R1.getUuid();
-        R3.addContact(ContactType.EMAILHOME, new Link(null,"mail1@ya.ru"));
-        R3.addContact(ContactType.CELLPHONE, new Link("11111",null));
-        R3.addContact(ContactType.SKYPE, new Link(null, "skype2"));
-        R3.addContact(ContactType.HABRPROFILE, new Link(null, "22222"));
+        R3.addContact(ContactType.EMAILHOME, new Link(null, "mail3@ya.ru"));
+        R3.addContact(ContactType.CELLPHONE, new Link("11111", null));
+        R3.addContact(ContactType.SKYPE, new Link(null, "skype3"));
+        R3.addContact(ContactType.HABRPROFILE, new Link(null, "22223"));
         R3.addSection(new TextSection("Objective1", SectionType.OBJECTIVE));
         R3.addSection(new ListSection(Arrays.asList("Achivment11", "Achivment12"), SectionType.ACHIEVEMENT));
         R3.addSection(new ListSection(Arrays.asList("Java", "SQL"), SectionType.QUALIFICATIONS));

@@ -32,10 +32,9 @@ abstract public class AbstractArrayStorageImpl extends AbstractStorageImpl {
 
     @Override
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            array[i] = null;
+        while (size-->0) {
+            array[size]=null;
         }
-        size = 0;
     }
 
     @Override
