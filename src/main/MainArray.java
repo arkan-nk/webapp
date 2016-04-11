@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class MainArray {
     public static void main(String[] args) {
-        ContactType[] contactTypes = new ContactType[]{ContactType.HOME_PAGE, ContactType.MAIL, ContactType.MOBILE};
+        ContactType[] contactTypes = new ContactType[]{ContactType.HOME_PAGE, ContactType.EMAILHOME, ContactType.CELLPHONE};
         ContactType[] contactTypes2 = new ContactType[5];
         System.out.println(contactTypes.length);
         System.out.println(contactTypes[0]);

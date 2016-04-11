@@ -1,28 +1,42 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * GKislin
  * 01.04.2016
  */
 public class OrganizationSection extends Section {
-
-    private final List<Organization> organizations;
-
-    public OrganizationSection(SectionType type, Organization... organizations) {
-        this(type, Arrays.asList(organizations));
+    public void addOrganization(Organization org, LocalDate sD, LocalDate fD, String t, String d) {
+        Objects.requireNonNull(org);
+        Organization orgAlreadyHave = searchSameOrganization(org);
+        if (orgAlreadyHave == null) {
+            organizations.add(org);
+            orgAlreadyHave = org;
+        }
+        orgAlreadyHave.addPosition(sD, fD, t, d);
     }
 
-    public OrganizationSection(SectionType type, List<Organization> organizations) {
-        super(type);
-        this.organizations = organizations;
+    private Organization searchSameOrganization(Organization o1) {
+        Objects.requireNonNull(o1);
+        Organization result = null;
+        for (Organization org : organizations) {
+            if (org.getHomePage().equals(o1.getHomePage())) {
+                result = org;
+                break;
+            }
+        }
+        return result;
     }
 
-    @Override
-    public String toString() {
-        return type + "(" + organizations.toString() + ')';
+    public List<Organization> getOrganizations() {
+        return organizations;
     }
 
+    public OrganizationSection(SectionType title) {
+        super(title);
+    }
+
+    private List<Organization> organizations = new ArrayList<Organization>();
 }
