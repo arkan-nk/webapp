@@ -14,7 +14,12 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
 
     @Override
     protected int getIndex(UUID uuid) {
-        return Arrays.binarySearch(array, 0, size, new Resume(uuid, " ", " "), comparator);
+        for (int i = 0; i < size; i++) {
+            if (array[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
