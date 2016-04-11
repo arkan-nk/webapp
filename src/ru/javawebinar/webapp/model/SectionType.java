@@ -12,7 +12,7 @@ public enum SectionType {
 
     SectionType(String text, SectionKind st) {
         title = text;
-        type = st;
+        kind = st;
     }
 
 
@@ -20,10 +20,10 @@ public enum SectionType {
         return title;
     }
 
-    public SectionKind getType() {
-        return type;
+    public SectionKind getKind() {
+        return kind;
     }
 
     private String title;
-    private SectionKind type;
+    private SectionKind kind;
 }

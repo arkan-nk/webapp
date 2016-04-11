@@ -1,6 +1,6 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * GKislin
@@ -12,12 +12,12 @@ public class Position {
     }
 
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -26,7 +26,7 @@ public class Position {
         return title;
     }
 
-    public Position(Date s, Date e, String t, String d) {
+    public Position(LocalDate s, LocalDate e, String t, String d) {
         startDate = s;
         endDate = e;
         title = t;
@@ -36,28 +36,28 @@ public class Position {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Position)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Position position = (Position) o;
 
-        if (!getStartDate().equals(position.getStartDate())) return false;
-        if (!getEndDate().equals(position.getEndDate())) return false;
-        if (!getTitle().equals(position.getTitle())) return false;
-        return getDescription() != null ? getDescription().equals(position.getDescription()) : position.getDescription() == null;
+        if (!title.equals(position.title)) return false;
+        if (!startDate.equals(position.startDate)) return false;
+        if (endDate != null ? !endDate.equals(position.endDate) : position.endDate != null) return false;
+        return description != null ? description.equals(position.description) : position.description == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getStartDate().hashCode();
-        result = 31 * result + getEndDate().hashCode();
-        result = 31 * result + getTitle().hashCode();
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        int result = title.hashCode();
+        result = 31 * result + startDate.hashCode();
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
 
-    private Date startDate;
-    private Date endDate;
     private String title;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String description;
 }

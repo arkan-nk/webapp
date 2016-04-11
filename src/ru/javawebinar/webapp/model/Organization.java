@@ -1,5 +1,6 @@
 package ru.javawebinar.webapp.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * 01.04.2016
  */
 public class Organization{
-    public void addPosition(Date sDate, Date eDate, String pos, String descr) {
+    public void addPosition(LocalDate sDate, LocalDate eDate, String pos, String descr) {
         positions.add(new Position(sDate, eDate, pos, descr));
     }
 
