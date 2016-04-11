@@ -18,20 +18,16 @@ public class SortedArrayStorageImpl extends AbstractArrayStorageImpl {
     //http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
     public void save(Resume r) {
         Objects.requireNonNull(r);
-        if(size>=ARRAY_LIMIT) throw new ArrayStoreException();
+        if(size>=ARRAY_LIMIT) throw new ArrayStoreException("Storage are completed");
         if (size<1) {
             array[0] = r;
             size++;
             return;
         }
         int index = Arrays.binarySearch(array, 0, size, r, comparator);
-
-        /*
-        System.arraycopy(array, 0, array, index
-
-        System.arraycopy(headArray, 0, array, 0, headArray.length);
-        System.arraycopy(new Resume[]{r}, 0, array, headArray.length, 1);
-        System.arraycopy(tailArray, 0, array, headArray.length + 2 , tailArray.length);*/
+        if (index<0) index = -index-1;
+        System.arraycopy(array, index, array, index + 1, size-index);
+        array[index]=r;
         size++;
     }
 

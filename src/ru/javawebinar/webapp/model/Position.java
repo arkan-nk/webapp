@@ -1,12 +1,21 @@
 package ru.javawebinar.webapp.model;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * GKislin
  * 01.04.2016
  */
 public class Position {
+    public Position(int year, Month month, String position1, String content1) {
+        this(LocalDate.of(year, month, 1), LocalDate.now(), position1, content1);
+    }
+
+    public Position(int year1, Month month1, int year2, Month month2, String position1, String content1) {
+        this(LocalDate.of(year1, month1, 1), LocalDate.of(year2, month2, 1), position1, content1);
+    }
+
     public String getDescription() {
         return description;
     }

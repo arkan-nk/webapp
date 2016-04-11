@@ -49,7 +49,7 @@ abstract public class AbstractArrayStorageImpl extends AbstractStorageImpl {
     public void delete(String uuid){
         requireNonNull(uuid, "Uuid must be not null");
         int indexTodel = getExistedIndex(uuid);
-        System.arraycopy(array, indexTodel+1, array, indexTodel, size-1);
+        System.arraycopy(array, indexTodel+1, array, indexTodel, size-indexTodel-1);
         array[size--]=null;
     }
 

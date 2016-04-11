@@ -10,8 +10,8 @@ import java.util.List;
  * 01.04.2016
  */
 public class Organization{
-    public void addPosition(LocalDate sDate, LocalDate eDate, String pos, String descr) {
-        positions.add(new Position(sDate, eDate, pos, descr));
+    public void addPosition(Position position) {
+        positions.add(position);
     }
 
     public Link getHomePage() {

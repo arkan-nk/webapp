@@ -8,14 +8,14 @@ import java.util.*;
  * 01.04.2016
  */
 public class OrganizationSection extends Section {
-    public void addOrganization(Organization org, LocalDate sD, LocalDate fD, String t, String d) {
+    public void addOrganization(Organization org, Position position) {
         Objects.requireNonNull(org);
         Organization orgAlreadyHave = searchSameOrganization(org);
         if (orgAlreadyHave == null) {
             organizations.add(org);
             orgAlreadyHave = org;
         }
-        orgAlreadyHave.addPosition(sD, fD, t, d);
+        orgAlreadyHave.addPosition(position);
     }
 
     private Organization searchSameOrganization(Organization o1) {
