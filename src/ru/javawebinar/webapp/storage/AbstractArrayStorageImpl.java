@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  * 08.04.2016
  */
 abstract public class AbstractArrayStorageImpl extends AbstractStorageImpl {
-    protected static final int ARRAY_LIMIT = 50000;
+    protected static final int ARRAY_LIMIT = 4;
 
     protected Resume[] array = new Resume[ARRAY_LIMIT];
     protected int size = 0;
@@ -32,9 +32,10 @@ abstract public class AbstractArrayStorageImpl extends AbstractStorageImpl {
 
     @Override
     public void clear() {
-        while (size-->0) {
-            array[size]=null;
+        for (int index=0; index<size; index++) {
+            array[index]=null;
         }
+        size=0;
     }
 
     @Override

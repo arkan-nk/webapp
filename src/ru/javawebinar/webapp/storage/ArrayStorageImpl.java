@@ -15,7 +15,7 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
     @Override
     protected int getIndex(UUID uuid) {
         for (int i = 0; i < size; i++) {
-            if (array[i].getUuid().equals(uuid)) {
+            if (array[i].getUUid().equals(uuid)) {
                 return i;
             }
         }
@@ -26,7 +26,7 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
     public void save(Resume r) {
         Objects.requireNonNull(r);
         int index = getIndex(r.getUUid());
-        if (index>=ARRAY_LIMIT) throw new ArrayStoreException("Storage are full");
+        if (index>=ARRAY_LIMIT) throw new ArrayIndexOutOfBoundsException("Storage are full");
         if (index>=0) throw new IllegalArgumentException("Resume already exists");
         array[size++] = r;
     }
@@ -48,8 +48,8 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
 
     @Override
     public Collection<Resume> getAllSorted() {
-        List<Resume> col = Arrays.asList(array);
-        Collections.sort(col, comparator);
-        return col;
+        Resume[] arr = Arrays.copyOf(array,size);
+        Arrays.sort(arr, comparator);
+        return Arrays.asList(arr);
     }
 }

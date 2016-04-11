@@ -18,7 +18,7 @@ public class SortedArrayStorageImpl extends AbstractArrayStorageImpl {
     //read http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
     public void save(Resume r) {
         Objects.requireNonNull(r);
-        if (size >= ARRAY_LIMIT) throw new ArrayStoreException("Storage are completed");
+        if (size >= ARRAY_LIMIT) throw new ArrayIndexOutOfBoundsException("Storage are completed");
         if (size < 1) {
             array[size++] = r;
             return;
