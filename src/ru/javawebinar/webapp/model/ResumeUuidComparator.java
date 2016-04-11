@@ -9,8 +9,8 @@ import java.util.Objects;
 public class ResumeUuidComparator implements Comparator<Resume> {
     @Override
     public int compare(Resume o1, Resume o2) {
-        Objects.requireNonNull(o1);
-        Objects.requireNonNull(o2);
+        if (o1==null && o2!=null) return -1;
+        if (o1!=null && o2==null) return 1;
         return o1.getUUid().compareTo(o2.getUUid());
     }
 }

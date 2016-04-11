@@ -4,8 +4,10 @@ import ru.javawebinar.webapp.model.*;
 import ru.javawebinar.webapp.storage.ArrayStorageImpl;
 import ru.javawebinar.webapp.storage.SortedArrayStorageImpl;
 import ru.javawebinar.webapp.storage.Storage;
+import ru.javawebinar.webapp.util.DateUtil;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 /**
@@ -25,30 +27,18 @@ public class MainArrayStorage {
         r1.addSection(new ListSection(qualifaicationList, SectionType.QUALIFICATIONS));
         r1.addSection(new OrganizationSection(SectionType.EXPERIENCE));
         r1.addSection(new OrganizationSection(SectionType.EDUCATION));
-        /*
-        Date fd = new Date(System.currentTimeMillis());
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.setTime(fd);
-        gregorianCalendar.add(Calendar.YEAR, -1);
-        Date sd = gregorianCalendar.getTime();
-        gregorianCalendar.add(Calendar.YEAR, -1);
-        Date fd1 = gregorianCalendar.getTime();
-        gregorianCalendar.add(Calendar.YEAR, -1);
-        Date sd1 = gregorianCalendar.getTime();
-        gregorianCalendar.add(Calendar.YEAR, -1);
-        Date fd2 = gregorianCalendar.getTime();
-        gregorianCalendar.add(Calendar.YEAR, -1);
-        Date sd2 = gregorianCalendar.getTime();
-        */
-        LocalDate sd=null; LocalDate fd=null;
-        LocalDate sd1=null; LocalDate fd1=null;
-        LocalDate sd2=null; LocalDate fd2=null;
+        LocalDate sd2 = DateUtil.of(2001, Month.DECEMBER);
+        LocalDate fd2 = DateUtil.of(2005, Month.SEPTEMBER);
+        LocalDate sd1 = DateUtil.of(2005, Month.DECEMBER);
+        LocalDate fd1 = DateUtil.of(2009, Month.JANUARY);
+        LocalDate sd = DateUtil.of(2009, Month.FEBRUARY);
+        LocalDate fd = DateUtil.of(2013, Month.DECEMBER);
         OrganizationSection workSection = r1.getOrganizationSection(SectionType.EXPERIENCE);
-        workSection.addOrganization(new Organization("Рога Копыта", "www.kapetc.org"), sd, fd, "Президент", "CTO");
+        workSection.addOrganization(new Organization("Рога Копыта", "www.kapetc.org"), new Position(sd, fd, "Президент", "CTO"));
 
         OrganizationSection eduSection = r1.getOrganizationSection(SectionType.EDUCATION);
-        eduSection.addOrganization(new Organization("Как будто где-то учился", "www.kbgu.edu"), sd1, fd1, "Студент", "двоечник");
+        eduSection.addOrganization(new Organization("Как будто где-то учился", "www.kbgu.edu"), new Position(sd1, fd1, "Студент", "двоечник"));
 
-        workSection.addOrganization(new Organization("Рога Копыта", "www.kapetc.org"), sd2, fd2, "Младший помощник", "Старшего дворника");
+        workSection.addOrganization(new Organization("Рога Копыта", "www.kapetc.org"), new Position(sd2, fd2, "Младший помощник", "Старшего дворника"));
     }
 }
