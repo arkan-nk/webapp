@@ -36,7 +36,6 @@ abstract public class AbstractArrayStorageImpl extends AbstractStorageImpl {
             array[i] = null;
         }
         size = 0;
-//        Arrays.fill(array, null); // let gc do h work
     }
 
     @Override
@@ -45,13 +44,6 @@ abstract public class AbstractArrayStorageImpl extends AbstractStorageImpl {
         array[getExistedIndex(r.getUuid())] = r;
     }
 
-    @Override
-    public void delete(String uuid){
-        requireNonNull(uuid, "Uuid must be not null");
-        int indexTodel = getExistedIndex(uuid);
-        System.arraycopy(array, indexTodel+1, array, indexTodel, size-indexTodel-1);
-        array[size--]=null;
-    }
 
     @Override
     public int size(){

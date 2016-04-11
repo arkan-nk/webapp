@@ -25,9 +25,17 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
     @Override
     public void save(Resume r) {
         Objects.requireNonNull(r);
-        int index = getExistedIndex(r.getUuid());
-        if (index<size) throw new ArrayStoreException();
+        int index = getIndex(r.getUUid());
+        if (index>=ARRAY_LIMIT) throw new ArrayStoreException("Storage are full");
+        if (index>=0) throw new IllegalArgumentException("Resume already exists");
         array[size++] = r;
+    }
+
+    @Override
+    public void delete(String uuid) {
+        Objects.requireNonNull(uuid);
+        array[getExistedIndex(uuid)] = array[--size];
+        array[size] = null;
     }
 
 
