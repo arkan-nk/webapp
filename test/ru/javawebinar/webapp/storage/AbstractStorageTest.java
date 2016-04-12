@@ -21,7 +21,9 @@ public class AbstractStorageTest {
 
     protected static Storage storage;
 
-    public AbstractStorageTest(){}
+    public AbstractStorageTest() {
+    }
+
     @Before
     public void before() {
         time1 = null;
@@ -46,20 +48,20 @@ public class AbstractStorageTest {
 
 
     @Test
-    public void size() throws Exception {
+    public void testSize() throws Exception {
         Assert.assertEquals(3, storage.size());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void saveExistent() throws Exception {
+    public void testSaveExistent() throws Exception {
         storage.save(R1);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void saveOver() {
+    public void testSaveOver() {
         int fillNum = storage.size();
-        for (int i=fillNum; i<50000; i++) {
-            Resume r = new Resume("test"+i, "test"+i);
+        for (int i = fillNum; i < 50000; i++) {
+            Resume r = new Resume("test" + i, "test" + i);
             storage.save(r);
         }
         Resume rMax = new Resume("FFrfq", "trye");
@@ -68,7 +70,7 @@ public class AbstractStorageTest {
 
 
     @Test
-    public void update() throws Exception {
+    public void testUpdate() throws Exception {
         R2.getContacts().clear();
         storage.update(R2);
         Resume r = storage.get(R2.getUuid());
@@ -76,27 +78,32 @@ public class AbstractStorageTest {
     }
 
     @Test
-    public void get() throws Exception {
+    public void testGet() throws Exception {
         Assert.assertEquals(R1, storage.get(R1.getUuid()));
         Assert.assertEquals(R2, storage.get(R2.getUuid()));
         Assert.assertEquals(R3, storage.get(R3.getUuid()));
     }
 
     @Test
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         storage.delete(R3.getUuid());
         Assert.assertEquals(storage.size(), 2);
     }
+
     @Test(expected = ResumeException.class)
-    public void getDeleted() throws Exception{
+    public void testGetDeleted() throws Exception {
         storage.delete(R3.getUuid());
         storage.get(R3.getUuid());
     }
 
     @Test
-    public void getAllSorted() throws Exception {
-        Collection coll = storage.getAllSorted();
+    public void testGetAllSorted() throws Exception {
+        Collection<Resume> coll = storage.getAllSorted();
         Assert.assertNotNull(coll);
         Assert.assertEquals(coll.size(), storage.size());
+        for (Resume res : coll) {
+            Resume instorage = storage.get(res.getUuid());
+            Assert.assertEquals(instorage, res);
+        }
     }
 }

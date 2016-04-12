@@ -1,8 +1,6 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.ResumeException;
 import ru.javawebinar.webapp.model.Resume;
-import ru.javawebinar.webapp.model.ResumeUuidComparator;
 
 import java.util.*;
 
@@ -25,9 +23,11 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
     @Override
     public void save(Resume r) {
         Objects.requireNonNull(r);
-        if (size>=ARRAY_LIMIT-1) throw new ArrayIndexOutOfBoundsException("Storage are full");
-        int index = getIndex(r.getUUid());
-        if (index>=0) throw new IllegalArgumentException("Resume already exists");
+        if (size < 1) {
+            array[size++] = r;
+            return;
+        }
+        findIndexToSave(r);
         array[size++] = r;
     }
 
@@ -44,12 +44,5 @@ public class ArrayStorageImpl extends AbstractArrayStorageImpl{
         Objects.requireNonNull(uuid);
         int index = getExistedIndex(uuid);
         return (index>-1) ? array[index] : null;
-    }
-
-    @Override
-    public Collection<Resume> getAllSorted() {
-        Resume[] arr = Arrays.copyOf(array,size);
-        Arrays.sort(arr, comparator);
-        return Arrays.asList(arr);
     }
 }

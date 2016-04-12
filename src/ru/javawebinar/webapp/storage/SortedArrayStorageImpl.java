@@ -2,7 +2,6 @@ package ru.javawebinar.webapp.storage;
 
 import ru.javawebinar.webapp.ResumeException;
 import ru.javawebinar.webapp.model.Resume;
-import ru.javawebinar.webapp.model.ResumeUuidComparator;
 
 import java.util.*;
 
@@ -19,13 +18,11 @@ public class SortedArrayStorageImpl extends AbstractArrayStorageImpl {
     //read http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
     public void save(Resume r) {
         Objects.requireNonNull(r);
-        if (size >= ARRAY_LIMIT-1) throw new ArrayIndexOutOfBoundsException("Storage are completed");
         if (size < 1) {
             array[size++] = r;
             return;
         }
-        int index = getIndex(r.getUUid());
-        if (index >= 0) throw new IllegalArgumentException("Resume " + r.getUuid() + "already exist");
+        int index = findIndexToSave(r);
         index = -index - 1;
         System.arraycopy(array, index, array, index + 1, size - index);
         array[index] = r;
@@ -56,14 +53,8 @@ public class SortedArrayStorageImpl extends AbstractArrayStorageImpl {
         requireNonNull(uuid, "Uuid must be not null");
         UUID realUid = UUID.fromString(uuid);
         int indexTodel = getIndex(realUid);
-        if (indexTodel<0) throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
+        if (indexTodel < 0) throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
         System.arraycopy(array, indexTodel + 1, array, indexTodel, size - indexTodel - 1);
         array[size--] = null;
-    }
-
-    @Override
-    public Collection<Resume> getAllSorted() {
-        Resume[] subarray = Arrays.copyOfRange(array, 0, size);
-        return Arrays.asList(subarray);
     }
 }
