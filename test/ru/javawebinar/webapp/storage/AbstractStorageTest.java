@@ -15,7 +15,7 @@ import static ru.javawebinar.webapp.ResumeTestData.R3;
 /**
  * Created by arkan on 12.04.2016.
  */
-public class AbstractStorageTest {
+abstract public class AbstractStorageTest {
     protected LocalTime time0;
     protected LocalTime time1;
 
