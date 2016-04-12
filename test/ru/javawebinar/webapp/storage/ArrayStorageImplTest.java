@@ -18,13 +18,6 @@ public class ArrayStorageImplTest extends AbstractStorageTest{
 
 
     public ArrayStorageImplTest() {
-    }
-
-    @BeforeClass
-    public static void beforeClass() {
         storage = new ArrayStorageImpl();
-        System.out.println("beforeClass");
     }
-
-
 }

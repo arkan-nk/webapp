@@ -56,5 +56,10 @@ public class SortedArrayStorageImpl extends AbstractArrayStorageImpl {
         if (indexTodel < 0) throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
         System.arraycopy(array, indexTodel + 1, array, indexTodel, size - indexTodel - 1);
         array[size--] = null;
+        /*
+        Objects.requireNonNull(uuid);
+        array[getExistedIndex(uuid)] = array[--size];
+        array[size] = null;
+         */
     }
 }

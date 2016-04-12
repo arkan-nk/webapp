@@ -19,7 +19,7 @@ abstract public class AbstractStorageTest {
     protected LocalTime time0;
     protected LocalTime time1;
 
-    protected static Storage storage;
+    protected Storage storage;
 
     public AbstractStorageTest() {
     }

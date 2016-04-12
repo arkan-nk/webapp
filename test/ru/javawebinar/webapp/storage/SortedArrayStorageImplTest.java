@@ -17,12 +17,6 @@ import static ru.javawebinar.webapp.ResumeTestData.R3;
  */
 public class SortedArrayStorageImplTest extends AbstractStorageTest{
     public SortedArrayStorageImplTest() {
-    }
-
-
-    @BeforeClass
-    public static void beforeClass() {
         storage = new SortedArrayStorageImpl();
-        System.out.println("beforeClass");
     }
 }
