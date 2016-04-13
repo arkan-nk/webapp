@@ -24,10 +24,10 @@
   - <a href="http://easy-code.ru/lesson/java-nested-classes">Вложенные и внутренние классы</a>. Примеры в Collections API: Arrays.asList, Map.Entry, LinkedList.Node, Collections, Iterator
   - <a href="http://easy-code.ru/lesson/local-anonymous-nested-classes-java">Локальные и анонимные классы.</a> Comparator.
 
-### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  5.<a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Доступно о Java 8 Lambda</a>
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  5. <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Доступно о Java 8 Lambda</a>
 
 ### ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW5
     Зарефакторить хранение секций и контактов на основе Map.
-    Выделить общий класс AbstractStorage
-    Отнаследовать от AbstractStorage и реализовать ListStorage и MapStorage (выбор реализации за вами).
+    Выделить общий класс AbstractStorage и реализовать подклассы ListStorage и MapStorage 
+                                                                 (выбор реализации List и Map за вами).
     Сделать Position внутрениим/вложенным классом. Проверить его созадние через new
