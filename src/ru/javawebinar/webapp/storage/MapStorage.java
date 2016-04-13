@@ -8,7 +8,7 @@ import java.util.Collection;
  * GKislin
  * 29.03.2016
  */
-public abstract class MapStorageImpl implements Storage {
+abstract class MapStorage implements Storage {
 
     @Override
     public void clear() {

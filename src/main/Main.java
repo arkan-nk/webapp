@@ -1,8 +1,6 @@
 package main;
 
 import ru.javawebinar.webapp.model.*;
-import ru.javawebinar.webapp.storage.MapStorageImpl;
-import ru.javawebinar.webapp.storage.Storage;
 
 import java.util.EnumMap;
 import java.util.Map;
