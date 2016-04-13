@@ -23,9 +23,11 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public void save(Resume r) {
         Objects.requireNonNull(r);
-        if (size>=ARRAY_LIMIT-1) throw new ArrayIndexOutOfBoundsException("Storage are full");
-        int index = getIndex(r.getUUid());
-        if (index>=0) throw new IllegalArgumentException("Resume already exists");
+        if (size < 1) {
+            array[size++] = r;
+            return;
+        }
+        findIndexToSave(r);
         array[size++] = r;
     }
 
@@ -42,12 +44,5 @@ public class ArrayStorage extends AbstractArrayStorage {
         Objects.requireNonNull(uuid);
         int index = getExistedIndex(uuid);
         return (index>-1) ? array[index] : null;
-    }
-
-    @Override
-    public Collection<Resume> getAllSorted() {
-        Resume[] arr = Arrays.copyOf(array,size);
-        Arrays.sort(arr, comparator);
-        return Arrays.asList(arr);
     }
 }
