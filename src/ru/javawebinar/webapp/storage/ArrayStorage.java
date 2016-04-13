@@ -1,8 +1,6 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.ResumeException;
 import ru.javawebinar.webapp.model.Resume;
-import ru.javawebinar.webapp.model.ResumeUuidComparator;
 
 import java.util.*;
 
@@ -10,7 +8,7 @@ import java.util.*;
  * GKislin
  * 05.04.2016
  */
-public class ArrayStorageImpl extends AbstractArrayStorageImpl{
+public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int getIndex(UUID uuid) {

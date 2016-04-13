@@ -14,18 +14,18 @@ import static ru.javawebinar.webapp.ResumeTestData.*;
  * GKislin
  * 08.04.2016
  */
-public class ArrayStorageImplTest {
+public class ArrayStorageTest {
     private static Storage storage;
     private LocalTime time0;
     private LocalTime time1;
 
 
-    public ArrayStorageImplTest() {
+    public ArrayStorageTest() {
     }
 
     @BeforeClass
     public static void beforeClass() {
-        storage = new ArrayStorageImpl();
+        storage = new ArrayStorage();
         System.out.println("beforeClass");
     }
 

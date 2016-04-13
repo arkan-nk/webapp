@@ -15,19 +15,19 @@ import static ru.javawebinar.webapp.ResumeTestData.R3;
 /**
  * Created by user on 11.04.2016.
  */
-public class SortedArrayStorageImplTest {
+public class SortedArrayStorageTest {
     private LocalTime time0;
     private LocalTime time1;
 
-    private static SortedArrayStorageImpl storage;
+    private static SortedArrayStorage storage;
 
-    public SortedArrayStorageImplTest() {
+    public SortedArrayStorageTest() {
     }
 
 
     @BeforeClass
     public static void beforeClass() {
-        storage = new SortedArrayStorageImpl();
+        storage = new SortedArrayStorage();
         System.out.println("beforeClass");
     }
 

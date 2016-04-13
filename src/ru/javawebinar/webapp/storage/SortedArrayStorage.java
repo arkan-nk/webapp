@@ -2,7 +2,6 @@ package ru.javawebinar.webapp.storage;
 
 import ru.javawebinar.webapp.ResumeException;
 import ru.javawebinar.webapp.model.Resume;
-import ru.javawebinar.webapp.model.ResumeUuidComparator;
 
 import java.util.*;
 
@@ -12,7 +11,7 @@ import static java.util.Objects.requireNonNull;
  * GKislin
  * 05.04.2016
  */
-public class SortedArrayStorageImpl extends AbstractArrayStorageImpl {
+public class SortedArrayStorage extends AbstractArrayStorage {
 
 
     @Override
