@@ -1,11 +1,7 @@
 package main;
 
 import ru.javawebinar.webapp.model.Link;
-import ru.javawebinar.webapp.model.Organization;
-import ru.javawebinar.webapp.model.OrganizationSection;
-import ru.javawebinar.webapp.model.Section;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,6 +23,6 @@ public class Main2 {
         l2.setUrl("2");
         System.out.println(l1);
 
-        //Section os = new OrganizationSection(Arrays.asList(new Organization(), new Organization()));
+//        Section os = new OrganizationSection(Arrays.asList(new Organization(), new Organization()));
     }
 }

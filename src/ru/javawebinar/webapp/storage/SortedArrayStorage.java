@@ -1,65 +1,34 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.ResumeException;
 import ru.javawebinar.webapp.model.Resume;
 
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
+import java.util.Arrays;
 
 /**
  * GKislin
  * 05.04.2016
  */
+
 public class SortedArrayStorage extends AbstractArrayStorage {
 
+    @Override
+    public void insert(Resume r, int idx) {
+//      http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
+        int insertIdx = -idx - 1;
+        System.arraycopy(array, insertIdx, array, insertIdx + 1, size - insertIdx);
+        array[insertIdx] = r;
+    }
 
     @Override
-    //read http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
-    public void save(Resume r) {
-        Objects.requireNonNull(r);
-        if (size < 1) {
-            array[size++] = r;
-            return;
+    public void shiftDeleted(String uuid, int idx) {
+        int numMoved = size - idx - 1;
+        if (numMoved > 0) {
+            System.arraycopy(array, idx + 1, array, idx, numMoved);
         }
-        int index = findIndexToSave(r);
-        index = -index - 1;
-        System.arraycopy(array, index, array, index + 1, size - index);
-        array[index] = r;
-        size++;
     }
 
-    @Override
-    protected int getIndex(UUID uuid) {
-        return Arrays.binarySearch(array, 0, size, new Resume(uuid, "", null), comparator);
-    }
-
-    @Override
-    public Resume get(String uuid) {
-        UUID realUid = UUID.fromString(uuid);
-        if (size < 1) throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
-        if (size < 2) {
-            if (array[0].getUUid().equals(realUid)) return array[0];
-            else throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
-
-        }
-        int index = getIndex(realUid);
-        if (index < 0) throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
-        return array[index];
-    }
-
-    @Override
-    public void delete(String uuid) {
-        requireNonNull(uuid, "Uuid must be not null");
-        UUID realUid = UUID.fromString(uuid);
-        int indexTodel = getIndex(realUid);
-        if (indexTodel < 0) throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
-        System.arraycopy(array, indexTodel + 1, array, indexTodel, size - indexTodel - 1);
-        array[size--] = null;
-        /*
-        Objects.requireNonNull(uuid);
-        array[getExistedIndex(uuid)] = array[--size];
-        array[size] = null;
-         */
+    protected int getIndex(String uuid) {
+        return Arrays.binarySearch(array, 0, size, new Resume(uuid, "", null),
+                (o1, o2) -> o1.getUuid().compareTo(o2.getUuid()));
     }
 }

@@ -1,74 +1,55 @@
 package ru.javawebinar.webapp.model;
 
-import ru.javawebinar.webapp.util.DateUtil;
-
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Objects;
+
+import static ru.javawebinar.webapp.util.DateUtil.NOW;
+import static ru.javawebinar.webapp.util.DateUtil.of;
 
 /**
  * GKislin
  * 01.04.2016
  */
 public class Position {
-    public Position(int year, Month month, String position1, String content1) {
-        this(DateUtil.of(year, month), DateUtil.NOW, position1, content1);
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private String title;
+    private String description;
+
+    public Position(int startYear, Month startMonth, String title, String description) {
+        this(of(startYear, startMonth), NOW, title, description);
     }
 
-    public Position(int year1, Month month1, int year2, Month month2, String position1, String content1) {
-        this(DateUtil.of(year1, month1), DateUtil.of(year2, month2), position1, content1);
+    public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description) {
+        this(of(startYear, startMonth), of(endYear, endMonth), title, description);
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Position(LocalDate s, LocalDate e, String t, String d) {
-        startDate = s;
-        endDate = e;
-        title = t;
-        description = d;
+    public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+        this.description = description;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Position position = (Position) o;
-
-        if (!title.equals(position.title)) return false;
-        if (!startDate.equals(position.startDate)) return false;
-        if (endDate != null ? !endDate.equals(position.endDate) : position.endDate != null) return false;
-        return description != null ? description.equals(position.description) : position.description == null;
-
+        return Objects.equals(startDate, position.startDate) &&
+                Objects.equals(endDate, position.endDate) &&
+                Objects.equals(title, position.title) &&
+                Objects.equals(description, position.description);
     }
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
-        result = 31 * result + startDate.hashCode();
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(startDate, endDate, title, description);
     }
 
-    private String title;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String description;
+    @Override
+    public String toString() {
+        return "Position(" + startDate + ',' + endDate + ',' + title + ',' + description + ')';
+    }
 }

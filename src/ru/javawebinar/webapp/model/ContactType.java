@@ -1,21 +1,24 @@
 package ru.javawebinar.webapp.model;
 
-
 /**
- * Created by arkan on 04.04.2016.
+ * GKislin
+ * 05.04.2016
  */
 public enum ContactType {
-    LOCATION("Проживание"), CELLPHONE("Мобильный тел."), EMAILHOME("e-mail"), SKYPE("skype"),
-    HOME_PAGE("Homepage"), HABRPROFILE("Habrhabr"), STACKOVFPROFILE("stackoverflow"),
-    GITHUBACC("github"), LINKEDLNPROFILE("LinkedIn");
+    PHONE("Тел."),
+    MOBILE("Мобильный"),
+    HOME_PHONE("Домашний тел."),
+    SKYPE("Skype"),
+    MAIL("Почта"),
+    HOME_PAGE("Домашняя страница");
 
-    ContactType(String title1) {
-        title = title1;
+    private final String title;
+
+    ContactType(String title) {
+        this.title = title;
     }
 
     public String getTitle() {
         return title;
     }
-
-    private String title;
 }

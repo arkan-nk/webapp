@@ -1,29 +1,19 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * GKislin
  * 01.04.2016
  */
 public class TextSection extends Section {
+    private String content;
 
-    public void setContent(String c) {
-        content = c;
+    public TextSection(SectionType type, String content) {
+        super(type);
+        this.content = content;
     }
 
     @Override
     public String toString() {
-        return "TextSection{" +
-                "content='" + content + '\'' +
-                '}';
+        return type + "(" + content + ')';
     }
-
-    public TextSection(String content, SectionType title) {
-        super(title);
-        this.content = content;
-    }
-
-    private String content;
 }

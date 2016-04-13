@@ -1,10 +1,10 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.ResumeException;
+import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.model.Resume;
-import ru.javawebinar.webapp.model.ResumeUuidComparator;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static java.util.Objects.requireNonNull;
 
@@ -17,49 +17,80 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
 
     protected Resume[] array = new Resume[ARRAY_LIMIT];
     protected int size = 0;
-    protected Comparator<Resume> comparator=new ResumeUuidComparator();
 
-    protected int getExistedIndex(String uuid) {
-        int idx = getIndex(UUID.fromString(uuid));
-        if (idx < 0) {
-            throw new ResumeException(uuid, "Resume with " + uuid + "not exist");
-        }
-        return idx;
+    protected abstract int getIndex(String uuid);
+
+    protected abstract void shiftDeleted(String uuid, int idx);
+
+    protected abstract void insert(Resume r, int idx);
+
+    private int getIndex(Resume r) {
+        return getIndex(r.getUuid());
     }
-
-    protected int findIndexToSave(Resume r){
-        if (size>=ARRAY_LIMIT-1) throw new ArrayIndexOutOfBoundsException("Storage are full");
-        int index = getIndex(r.getUUid());
-        if (index>=0) throw new IllegalArgumentException("Resume already exists");
-        return index;
-    }
-
-    protected abstract int getIndex(UUID uuid);
 
     @Override
-    public void clear() {
-        for (int index=0; index<size; index++) {
-            array[index]=null;
+    public void doClear() {
+        for (int i = 0; i < size; i++) {
+            array[i] = null;
         }
-        size=0;
+        size = 0;
+    }
+
+    @Override
+    public void save(Resume r) {
+        requireNonNull(r, "Resume must not be null");
+        int idx = getIndex(r);
+        String uuid = r.getUuid();
+        if (idx >= 0) {
+            throw new ResumeStorageException(uuid, "Resume " + uuid + " must be exist");
+        }
+        if (size == ARRAY_LIMIT) {
+            throw new ResumeStorageException(uuid, "Array size limit(" + ARRAY_LIMIT + ") exceeded");
+        }
+        insert(r, idx);
+        size++;
     }
 
     @Override
     public void update(Resume r) {
-        requireNonNull(r);
-        array[getExistedIndex(r.getUuid())] = r;
+        requireNonNull(r, "Resume must not be null");
+        int idx = getIndex(r);
+        mustExist(r.getUuid(), idx);
+        array[getIndex(r.getUuid())] = r;
     }
 
+    @Override
+    public Resume get(String uuid) {
+        requireNonNull(uuid, "UUID must not be null");
+        int idx = getIndex(uuid);
+        mustExist(uuid, idx);
+        return array[getIndex(uuid)];
+    }
 
     @Override
-    public int size(){
-        return size;
+    public void delete(String uuid) {
+        requireNonNull(uuid, "UUID must not be null");
+        int idx = getIndex(uuid);
+        mustExist(uuid, idx);
+        shiftDeleted(uuid, idx);
+        array[size--] = null;
     }
 
     @Override
     public Collection<Resume> getAllSorted() {
-        Resume[] arr = Arrays.copyOfRange(array,0, size);
-        Arrays.sort(arr, comparator);
-        return Arrays.asList(arr);
+        Resume[] copy = Arrays.copyOf(array, size);
+        Arrays.sort(copy);
+        return Arrays.asList(copy);
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    private void mustExist(String uuid, int idx) {
+        if (idx < 0) {
+            throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+        }
     }
 }

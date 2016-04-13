@@ -1,109 +1,111 @@
 package ru.javawebinar.webapp.storage;
 
-import org.junit.*;
-import ru.javawebinar.webapp.ResumeException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.ResumeTestData;
 import ru.javawebinar.webapp.model.Resume;
 
-import java.time.LocalTime;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static ru.javawebinar.webapp.ResumeTestData.R1;
-import static ru.javawebinar.webapp.ResumeTestData.R2;
-import static ru.javawebinar.webapp.ResumeTestData.R3;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
- * Created by arkan on 12.04.2016.
+ * GKislin
+ * 09.10.2015.
  */
-abstract public class AbstractStorageTest {
-    protected LocalTime time0;
-    protected LocalTime time1;
+public abstract class AbstractStorageTest {
 
-    protected Storage storage;
+    private final Storage storage;
 
-    public AbstractStorageTest() {
+    public AbstractStorageTest(Storage storage) {
+        requireNonNull(storage, "Storage must not be null");
+        this.storage = storage;
     }
 
     @Before
-    public void before() {
-        time1 = null;
-        ResumeTestData.init();
+    public void setUp() throws Exception {
         storage.clear();
-        storage.save(R1);
-        storage.save(R2);
-        storage.save(R3);
-        time0 = LocalTime.now();
+        ResumeTestData.init();
+        storage.save(ResumeTestData.R1);
+        storage.save(ResumeTestData.R2);
+        storage.save(ResumeTestData.R3);
     }
-
 
     @After
-    public void after() {
-        time1 = LocalTime.now();
+    public void tearDown() throws Exception {
     }
 
-    @AfterClass
-    public static void afterClass() {
-        System.out.println("afterClass");
+    @Test
+    public void testClear() throws Exception {
+        storage.clear();
+        assertSize(0);
     }
-
 
     @Test
     public void testSize() throws Exception {
-        Assert.assertEquals(3, storage.size());
+        assertSize(3);
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSaveExistent() throws Exception {
-        storage.save(R1);
-    }
-
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void testSaveOver() {
-        int fillNum = storage.size();
-        for (int i = fillNum; i < 50000; i++) {
-            Resume r = new Resume("test" + i, "test" + i);
-            storage.save(r);
-        }
-        Resume rMax = new Resume("FFrfq", "trye");
-        storage.save(rMax);
-    }
-
 
     @Test
     public void testUpdate() throws Exception {
-        R2.getContacts().clear();
-        storage.update(R2);
-        Resume r = storage.get(R2.getUuid());
-        Assert.assertEquals(R2.getContacts().size(), r.getContacts().size());
+        ResumeTestData.R2.setFullName("Updated N2");
+        storage.update(ResumeTestData.R2);
+        assertGet(ResumeTestData.R2);
+    }
+
+    @Test
+    public void testUpdateMissed() throws Exception {
+        Resume resume = new Resume("fullName_U1", "location_U1");
+        try {
+            storage.update(resume);
+        } catch (Exception e) {
+            return;
+        }
+        fail("Excpected ResumeStorageException");
     }
 
     @Test
     public void testGet() throws Exception {
-        Assert.assertEquals(R1, storage.get(R1.getUuid()));
-        Assert.assertEquals(R2, storage.get(R2.getUuid()));
-        Assert.assertEquals(R3, storage.get(R3.getUuid()));
+        assertGet(ResumeTestData.R1);
+        assertGet(ResumeTestData.R2);
+        assertGet(ResumeTestData.R3);
+    }
+
+    @Test(expected = ResumeStorageException.class)
+    public void testSaveAlreadyExist() throws Exception {
+        storage.save(ResumeTestData.R1);
     }
 
     @Test
     public void testDelete() throws Exception {
-        storage.delete(R3.getUuid());
-        Assert.assertEquals(storage.size(), 2);
+        storage.delete(ResumeTestData.R1.getUuid());
+        assertSize(2);
+        assertGet(ResumeTestData.R2);
+        assertGet(ResumeTestData.R3);
     }
 
-    @Test(expected = ResumeException.class)
-    public void testGetDeleted() throws Exception {
-        storage.delete(R3.getUuid());
-        storage.get(R3.getUuid());
+    @Test(expected = ResumeStorageException.class)
+    public void testDeleteNotFound() throws Exception {
+        storage.get("dummy");
     }
 
     @Test
     public void testGetAllSorted() throws Exception {
-        Collection<Resume> coll = storage.getAllSorted();
-        Assert.assertNotNull(coll);
-        Assert.assertEquals(coll.size(), storage.size());
-        for (Resume res : coll) {
-            Resume instorage = storage.get(res.getUuid());
-            Assert.assertEquals(instorage, res);
-        }
+        List<Resume> list = Arrays.asList(ResumeTestData.R1, ResumeTestData.R2, ResumeTestData.R3);
+        assertEquals(list, new ArrayList<>(storage.getAllSorted()));
+    }
+
+    private void assertGet(Resume r) {
+        assertEquals(r, storage.get(r.getUuid()));
+    }
+
+    private void assertSize(int size) {
+        assertEquals(size, storage.size());
     }
 }
