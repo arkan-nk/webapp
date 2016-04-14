@@ -25,6 +25,12 @@ public class Organization {
         this.homePage = homePage;
         this.positions = positions;
     }
+    public void addActualPosition(int startYear, Month startMonth, String title, String description){
+        positions.add(new Position(startYear, startMonth, title, description));
+    }
+    public void addPastPosition(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description){
+        positions.add(new Position(startYear, startMonth, endYear, endMonth, title, description));
+    }
 
     @Override
     public boolean equals(Object o) {
