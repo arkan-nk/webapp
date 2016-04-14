@@ -7,9 +7,7 @@ import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.ResumeTestData;
 import ru.javawebinar.webapp.model.Resume;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
@@ -98,6 +96,12 @@ public abstract class AbstractStorageTest {
     @Test
     public void testGetAllSorted() throws Exception {
         List<Resume> list = Arrays.asList(ResumeTestData.R1, ResumeTestData.R2, ResumeTestData.R3);
+        Collections.sort(list, new Comparator<Resume>() {
+                    @Override
+                    public int compare(Resume o1, Resume o2) {
+                        return o1.getUuid().compareTo(o2.getUuid());
+                    }
+                });
         assertEquals(list, new ArrayList<>(storage.getAllSorted()));
     }
 

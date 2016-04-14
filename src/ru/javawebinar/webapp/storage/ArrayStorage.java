@@ -9,7 +9,7 @@ import ru.javawebinar.webapp.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    public void shiftDeleted(String uuid, int idx) {
+    protected void shiftDeleted(String uuid, int idx) {
         array[idx] = array[size - 1];
     }
 

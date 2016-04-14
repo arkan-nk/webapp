@@ -37,12 +37,11 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void save(Resume r) {
-        requireNonNull(r, "Resume must not be null");
+    protected void doSave(Resume r) {
         int idx = getIndex(r);
         String uuid = r.getUuid();
         if (idx >= 0) {
-            throw new ResumeStorageException(uuid, "Resume " + uuid + " must be exist");
+            throw new ResumeStorageException(uuid, "Resume " + uuid + " already exists");
         }
         if (size == ARRAY_LIMIT) {
             throw new ResumeStorageException(uuid, "Array size limit(" + ARRAY_LIMIT + ") exceeded");
@@ -52,24 +51,21 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void update(Resume r) {
-        requireNonNull(r, "Resume must not be null");
+    protected void doUpdate(Resume r) {
         int idx = getIndex(r);
         mustExist(r.getUuid(), idx);
         array[getIndex(r.getUuid())] = r;
     }
 
     @Override
-    public Resume get(String uuid) {
-        requireNonNull(uuid, "UUID must not be null");
+    protected Resume doGet(String uuid) {
         int idx = getIndex(uuid);
         mustExist(uuid, idx);
         return array[getIndex(uuid)];
     }
 
     @Override
-    public void delete(String uuid) {
-        requireNonNull(uuid, "UUID must not be null");
+    protected void doDelete(String uuid) {
         int idx = getIndex(uuid);
         mustExist(uuid, idx);
         shiftDeleted(uuid, idx);
@@ -77,14 +73,14 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public Collection<Resume> getAllSorted() {
+    protected Collection<Resume> getResumeCollection() {
         Resume[] copy = Arrays.copyOf(array, size);
         Arrays.sort(copy);
         return Arrays.asList(copy);
     }
 
     @Override
-    public int size() {
+    protected int getSize() {
         return size;
     }
 
