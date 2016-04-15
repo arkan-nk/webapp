@@ -16,4 +16,8 @@ public class ResumeException extends RuntimeException {
         super(message, cause);
         this.uuid = uuid;
     }
+
+    public String getUuid() {
+        return uuid;
+    }
 }

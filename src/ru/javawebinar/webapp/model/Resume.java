@@ -1,7 +1,7 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,8 +13,8 @@ public class Resume implements Comparable {
     private final String uuid;
     private String fullName;
     private String about;
-    private List<Contact> contacts = new ArrayList<>();
-    private List<Section> sections = new ArrayList<>();
+    private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName, String about) {
         this(UUID.randomUUID().toString(), fullName, about);
@@ -28,11 +28,11 @@ public class Resume implements Comparable {
     }
 
     public void addContact(ContactType type, String value) {
-        contacts.add(new Contact(type, value));
+        contacts.put(type, value);
     }
 
-    public void addSection(Section section) {
-        sections.add(section);
+    public void addSection(SectionType type, Section section) {
+        sections.put(type, section);
     }
 
     @Override

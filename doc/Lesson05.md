@@ -13,16 +13,16 @@
   - <a href="http://appliedjava.wordpress.com/2010/09/23/java-collections-framework/">Коллекции Java (Java Collections Framework)</a>
   - Посмотреть реализацию Map. <a href="http://habrahabr.ru/post/162017/">Проверить себя по статье</a>
 
-### 2. Разбор HW4.
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFd1ZUNkNJUkYwZGs">Вопрос про Stack. Разбор HW4.</a>
 
-### 3. Логгирование
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFYmlKOVFseXE3clk">Вложенные, внутренние, локальные и анонимные классы.</a>
+  - <a href="http://easy-code.ru/lesson/java-nested-classes">Вложенные и внутренние классы</a>. Примеры в Collections API: Arrays.asList, Map.Entry, LinkedList.Node, Collections, Iterator
+  - <a href="http://easy-code.ru/lesson/local-anonymous-nested-classes-java">Локальные и анонимные классы.</a> Comparator.
+
+### 4. Логгирование
   - Логирование. <a href="http://habrahabr.ru/post/130195/">Настройка логирования</a>
   - <a href="http://habrahabr.ru/post/113145/">Java Logging: история кошмара (Optional)</a>
   - <a href="http://skipy.ru/useful/logging.html">Ведение лога приложения (Optional)</a>
-
-### 4. Вложенные, внутренние, локальные и анонимные классы.
-  - <a href="http://easy-code.ru/lesson/java-nested-classes">Вложенные и внутренние классы</a>. Примеры в Collections API: Arrays.asList, Map.Entry, LinkedList.Node, Collections, Iterator
-  - <a href="http://easy-code.ru/lesson/local-anonymous-nested-classes-java">Локальные и анонимные классы.</a> Comparator.
 
 ### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png)  5. <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Доступно о Java 8 Lambda</a>
 

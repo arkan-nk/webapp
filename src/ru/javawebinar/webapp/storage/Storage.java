@@ -2,7 +2,7 @@ package ru.javawebinar.webapp.storage;
 
 import ru.javawebinar.webapp.model.Resume;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * GKislin
@@ -19,7 +19,7 @@ public interface Storage {
 
     void delete(String uuid);
 
-    Collection<Resume> getAllSorted();
+    List<Resume> getAllSorted();
 
     int size();
 }
