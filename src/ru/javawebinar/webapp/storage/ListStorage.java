@@ -22,18 +22,18 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r) throws ResumeStorageException {
+    protected void doSave(Resume r){
         storageList.add(r);
     }
 
     @Override
-    protected void doUpdate(Resume r) throws ResumeStorageException {
+    protected void doUpdate(Resume r){
         storageList.remove(r);
         storageList.add(r);
     }
 
     @Override
-    protected Resume doGet(String uuid) throws ResumeStorageException {
+    protected Resume doGet(String uuid) {
         return storageList.get(checker.getCheckerIndex());
     }
 
@@ -44,7 +44,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doDelete(String uuid) throws ResumeStorageException {
+    protected void doDelete(String uuid) {
         storageList.remove(checker.getCheckerIndex());
     }
 
@@ -60,7 +60,7 @@ public class ListStorage extends AbstractStorage {
         return storageList.size();
     }
 
-    private int indexInStorage(String uuid) throws ResumeStorageException {
+    private int indexInStorage(String uuid){
         int index = 0;
         for (Resume res : storageList) {
             if (uuid.equals(res.getUuid())) return index;

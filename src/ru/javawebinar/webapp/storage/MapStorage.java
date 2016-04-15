@@ -69,8 +69,9 @@ public class MapStorage extends AbstractStorage {
         //if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         return storageMap.get(uuid);
     }
+
     @Override
-    protected boolean containsInStorage(String uuid){
+    protected boolean containsInStorage(String uuid) {
         return storageMap.containsKey(uuid);
     }
 }
