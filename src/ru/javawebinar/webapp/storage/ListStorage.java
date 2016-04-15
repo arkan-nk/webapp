@@ -1,6 +1,5 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.model.Resume;
 
 import java.util.*;
@@ -10,7 +9,6 @@ import java.util.*;
  */
 public class ListStorage extends AbstractStorage {
     private List<Resume> storageList;
-    private Checker checker;
 
     public ListStorage(List<Resume> listForResume) {
         storageList = listForResume;
@@ -22,30 +20,28 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r){
+    protected void doSave(Resume r, int index){
         storageList.add(r);
     }
 
     @Override
-    protected void doUpdate(Resume r){
-        storageList.remove(r);
-        storageList.add(r);
+    protected void doUpdate(Resume r, int index){
+        storageList.set(index, r);
     }
 
     @Override
-    protected Resume doGet(String uuid) {
-        return storageList.get(checker.getCheckerIndex());
+    protected Resume doGet(String uuid, int index) {
+        return storageList.get(index);
     }
 
     @Override
-    protected boolean containsInStorage(String uuid) {
-        checker = new Checker(uuid);
-        return (checker.getCheckerIndex() > -1);
+    protected int indexInStorage(String uuid) {
+        return getIndex(uuid);
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        storageList.remove(checker.getCheckerIndex());
+    protected void doDelete(String uuid, int index) {
+        storageList.remove(index);
     }
 
     @Override
@@ -60,7 +56,7 @@ public class ListStorage extends AbstractStorage {
         return storageList.size();
     }
 
-    private int indexInStorage(String uuid){
+    private int getIndex(String uuid){
         int index = 0;
         for (Resume res : storageList) {
             if (uuid.equals(res.getUuid())) return index;
@@ -73,20 +69,6 @@ public class ListStorage extends AbstractStorage {
         if (index < 0) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         return index;
         */
-    }
-
-    private class Checker {
-        public Checker(String u) {
-            uuid = u;
-            index = indexInStorage(u);
-        }
-
-        public int getCheckerIndex() {
-            return index;
-        }
-
-        private String uuid;
-        private int index;
     }
 
     private class UuidComparator implements Comparator<Resume> {

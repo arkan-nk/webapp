@@ -3,9 +3,7 @@ package ru.javawebinar.webapp.storage;
 import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.model.Resume;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -35,24 +33,27 @@ abstract public class AbstractStorage implements Storage {
     public void save(Resume r) {
         log.info("save " + r.getUuid());
         Objects.requireNonNull(r, "Resume must not be null");
-        if (containsInStorage(r.getUuid())) throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
-        doSave(r);
+        int index = indexInStorage(r.getUuid());
+        if (index>-1) throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
+        doSave(r, index);
     }
 
     @Override
     public void update(Resume r) {
         log.info("update " + r.getUuid());
         Objects.requireNonNull(r, "Resume must not be null");
-        if (!containsInStorage(r.getUuid())) throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
-        doUpdate(r);
+        int index = indexInStorage(r.getUuid());
+        if (index<0) throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
+        doUpdate(r, index);
     }
 
     @Override
     public void delete(String uuid) {
         log.info("delete " + uuid);
         requireNonNull(uuid, "UUID must not be null");
-        if (!containsInStorage(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
-        doDelete(uuid);
+        int index = indexInStorage(uuid);
+        if (index<0) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+        doDelete(uuid, index);
     }
 
     @Override
@@ -65,9 +66,11 @@ abstract public class AbstractStorage implements Storage {
     public Resume get(String uuid) {
         log.info("get " + uuid);
         requireNonNull(uuid, "UUID must not be null");
-        if (!containsInStorage(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
-        return doGet(uuid);
+        int index = indexInStorage(uuid);
+        if (index<0) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+        return doGet(uuid, index);
     }
+
 
     protected abstract void doClear();
 
@@ -75,13 +78,13 @@ abstract public class AbstractStorage implements Storage {
 
     protected abstract Collection<Resume> getResumeCollection();
 
-    protected abstract void doSave(Resume r);
+    protected abstract void doSave(Resume r, int index);
 
-    protected abstract void doUpdate(Resume r);
+    protected abstract void doUpdate(Resume r, int index);
 
-    protected abstract void doDelete(String uuid);
+    protected abstract void doDelete(String uuid, int index);
 
-    protected abstract Resume doGet(String uuid);
+    protected abstract Resume doGet(String uuid, int index);
 
-    protected abstract boolean containsInStorage(String uuid);
+    protected abstract int indexInStorage(String uuid);
 }

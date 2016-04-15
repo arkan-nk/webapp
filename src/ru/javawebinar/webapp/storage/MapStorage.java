@@ -1,6 +1,5 @@
 package ru.javawebinar.webapp.storage;
 
-import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.model.Resume;
 
 import java.util.Arrays;
@@ -45,33 +44,27 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r) {
-        //if (storageMap.containsKey(r.getUuid()))
-        //    throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
+    protected void doSave(Resume r, int index) {
         storageMap.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doUpdate(Resume r) {
-        //if (!storageMap.containsKey(r.getUuid()))
-        //   throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
+    protected void doUpdate(Resume r, int index) {
         storageMap.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        //if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+    protected void doDelete(String uuid, int index) {
         storageMap.remove(uuid);
     }
 
     @Override
-    protected Resume doGet(String uuid) {
-        //if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+    protected Resume doGet(String uuid, int index) {
         return storageMap.get(uuid);
     }
 
     @Override
-    protected boolean containsInStorage(String uuid) {
-        return storageMap.containsKey(uuid);
+    protected int indexInStorage(String uuid) {
+        return storageMap.containsKey(uuid)?0:-1;
     }
 }

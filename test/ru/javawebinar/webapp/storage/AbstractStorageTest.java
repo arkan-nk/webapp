@@ -17,11 +17,11 @@ import static org.junit.Assert.fail;
  * GKislin
  * 09.10.2015.
  */
-public abstract class AbstractStorageTest<T extends Storage> {
+public abstract class AbstractStorageTest {
 
-    private final T storage;
+    private final Storage storage;
 
-    public AbstractStorageTest(T storage) {
+    public AbstractStorageTest(Storage storage) {
         requireNonNull(storage, "Storage must not be null");
         this.storage = storage;
     }

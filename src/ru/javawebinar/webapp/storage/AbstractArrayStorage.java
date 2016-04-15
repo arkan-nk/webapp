@@ -24,7 +24,6 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract void insert(Resume r, int idx);
 
-    private Checker checker;
 
     @Override
     public void doClear() {
@@ -35,27 +34,27 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r) {
+    protected void doSave(Resume r, int index) {
         if (size == ARRAY_LIMIT) {
             throw new ResumeStorageException(r.getUuid(), "Array size limit(" + ARRAY_LIMIT + ") exceeded");
         }
-        insert(r, checker.getCheckerIndex());
+        insert(r, index);
         size++;
     }
 
     @Override
-    protected void doUpdate(Resume r) {
-        array[checker.getCheckerIndex()] = r;
+    protected void doUpdate(Resume r, int index) {
+        array[index] = r;
     }
 
     @Override
-    protected Resume doGet(String uuid) {
-        return array[checker.getCheckerIndex()];
+    protected Resume doGet(String uuid, int index) {
+        return array[index];
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        shiftDeleted(uuid, checker.getCheckerIndex());
+    protected void doDelete(String uuid, int index) {
+        shiftDeleted(uuid, index);
         array[size--] = null;
     }
 
@@ -67,25 +66,12 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean containsInStorage(String uuid){
-        checker = new Checker(uuid);
-        return (checker.getCheckerIndex()>-1);
+    protected int indexInStorage(String uuid) {
+        return getIndex(uuid);
     }
 
     @Override
     protected int getSize() {
         return size;
-    }
-
-    private class Checker {
-        private String uuid;
-        private int index;
-        public Checker(String u){
-            uuid = u;
-            index = getIndex(uuid);
-        }
-        public int getCheckerIndex(){
-            return index;
-        }
     }
 }
