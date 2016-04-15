@@ -45,29 +45,32 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r) throws ResumeStorageException {
-        if (storageMap.containsKey(r.getUuid()))
-            throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
+    protected void doSave(Resume r) {
+        //if (storageMap.containsKey(r.getUuid()))
+        //    throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
         storageMap.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doUpdate(Resume r) throws ResumeStorageException {
-        if (!storageMap.containsKey(r.getUuid()))
-            throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
-        storageMap.remove(r.getUuid());
+    protected void doUpdate(Resume r) {
+        //if (!storageMap.containsKey(r.getUuid()))
+        //   throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
         storageMap.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doDelete(String uuid) throws ResumeStorageException {
-        if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+    protected void doDelete(String uuid) {
+        //if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         storageMap.remove(uuid);
     }
 
     @Override
-    protected Resume doGet(String uuid) throws ResumeStorageException {
-        if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+    protected Resume doGet(String uuid) {
+        //if (!storageMap.containsKey(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         return storageMap.get(uuid);
+    }
+    @Override
+    protected boolean containsInStorage(String uuid){
+        return storageMap.containsKey(uuid);
     }
 }

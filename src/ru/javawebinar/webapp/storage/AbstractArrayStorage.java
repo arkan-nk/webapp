@@ -24,9 +24,7 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
 
     protected abstract void insert(Resume r, int idx);
 
-    private int getIndex(Resume r) {
-        return getIndex(r.getUuid());
-    }
+    private Checker checker;
 
     @Override
     public void doClear() {
@@ -38,37 +36,26 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected void doSave(Resume r) {
-        int idx = getIndex(r);
-        String uuid = r.getUuid();
-        if (idx >= 0) {
-            throw new ResumeStorageException(uuid, "Resume " + uuid + " already exists");
-        }
         if (size == ARRAY_LIMIT) {
-            throw new ResumeStorageException(uuid, "Array size limit(" + ARRAY_LIMIT + ") exceeded");
+            throw new ResumeStorageException(r.getUuid(), "Array size limit(" + ARRAY_LIMIT + ") exceeded");
         }
-        insert(r, idx);
+        insert(r, checker.getCheckerIndex());
         size++;
     }
 
     @Override
     protected void doUpdate(Resume r) {
-        int idx = getIndex(r);
-        mustExist(r.getUuid(), idx);
-        array[getIndex(r.getUuid())] = r;
+        array[checker.getCheckerIndex()] = r;
     }
 
     @Override
     protected Resume doGet(String uuid) {
-        int idx = getIndex(uuid);
-        mustExist(uuid, idx);
-        return array[getIndex(uuid)];
+        return array[checker.getCheckerIndex()];
     }
 
     @Override
     protected void doDelete(String uuid) {
-        int idx = getIndex(uuid);
-        mustExist(uuid, idx);
-        shiftDeleted(uuid, idx);
+        shiftDeleted(uuid, checker.getCheckerIndex());
         array[size--] = null;
     }
 
@@ -80,13 +67,25 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
+    protected boolean containsInStorage(String uuid){
+        checker = new Checker(uuid);
+        return (checker.getCheckerIndex()>-1);
+    }
+
+    @Override
     protected int getSize() {
         return size;
     }
 
-    private void mustExist(String uuid, int idx) {
-        if (idx < 0) {
-            throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
+    private class Checker {
+        private String uuid;
+        private int index;
+        public Checker(String u){
+            uuid = u;
+            index = getIndex(uuid);
+        }
+        public int getCheckerIndex(){
+            return index;
         }
     }
 }

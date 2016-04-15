@@ -16,7 +16,6 @@ import static java.util.Objects.requireNonNull;
  * 08.04.2016
  */
 abstract public class AbstractStorage implements Storage {
-//    private final static Logger LOG = Logger.getLogger(AbstractStorage.class.getName());
 
     protected final Logger log = Logger.getLogger(getClass().getName());
 
@@ -36,6 +35,7 @@ abstract public class AbstractStorage implements Storage {
     public void save(Resume r) {
         log.info("save " + r.getUuid());
         Objects.requireNonNull(r, "Resume must not be null");
+        if (containsInStorage(r.getUuid())) throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
         doSave(r);
     }
 
@@ -43,6 +43,7 @@ abstract public class AbstractStorage implements Storage {
     public void update(Resume r) {
         log.info("update " + r.getUuid());
         Objects.requireNonNull(r, "Resume must not be null");
+        if (!containsInStorage(r.getUuid())) throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
         doUpdate(r);
     }
 
@@ -50,6 +51,7 @@ abstract public class AbstractStorage implements Storage {
     public void delete(String uuid) {
         log.info("delete " + uuid);
         requireNonNull(uuid, "UUID must not be null");
+        if (!containsInStorage(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         doDelete(uuid);
     }
 
@@ -63,6 +65,7 @@ abstract public class AbstractStorage implements Storage {
     public Resume get(String uuid) {
         log.info("get " + uuid);
         requireNonNull(uuid, "UUID must not be null");
+        if (!containsInStorage(uuid)) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         return doGet(uuid);
     }
 
@@ -72,11 +75,13 @@ abstract public class AbstractStorage implements Storage {
 
     protected abstract Collection<Resume> getResumeCollection();
 
-    protected abstract void doSave(Resume r) throws ResumeStorageException;
+    protected abstract void doSave(Resume r);
 
-    protected abstract void doUpdate(Resume r) throws ResumeStorageException;
+    protected abstract void doUpdate(Resume r);
 
-    protected abstract void doDelete(String uuid) throws ResumeStorageException;
+    protected abstract void doDelete(String uuid);
 
-    protected abstract Resume doGet(String uuid) throws ResumeStorageException;
+    protected abstract Resume doGet(String uuid);
+
+    protected abstract boolean containsInStorage(String uuid);
 }

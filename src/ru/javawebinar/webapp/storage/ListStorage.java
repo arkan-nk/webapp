@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class ListStorage extends AbstractStorage {
     private List<Resume> storageList;
+    private Checker checker;
 
     public ListStorage(List<Resume> listForResume) {
         storageList = listForResume;
@@ -22,29 +23,29 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doSave(Resume r) throws ResumeStorageException {
-        if (storageList.contains(r))
-            throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " already exists");
         storageList.add(r);
     }
 
     @Override
     protected void doUpdate(Resume r) throws ResumeStorageException {
-        if (!storageList.contains(r))
-            throw new ResumeStorageException(r.getUuid(), "Resume " + r.getUuid() + " not found");
         storageList.remove(r);
         storageList.add(r);
     }
 
     @Override
     protected Resume doGet(String uuid) throws ResumeStorageException {
-        int index = indexInStorage(uuid);
-        return storageList.get(index);
+        return storageList.get(checker.getCheckerIndex());
+    }
+
+    @Override
+    protected boolean containsInStorage(String uuid) {
+        checker = new Checker(uuid);
+        return (checker.getCheckerIndex() > -1);
     }
 
     @Override
     protected void doDelete(String uuid) throws ResumeStorageException {
-        int index = indexInStorage(uuid);
-        storageList.remove(index);
+        storageList.remove(checker.getCheckerIndex());
     }
 
     @Override
@@ -60,14 +61,35 @@ public class ListStorage extends AbstractStorage {
     }
 
     private int indexInStorage(String uuid) throws ResumeStorageException {
+        int index = 0;
+        for (Resume res : storageList) {
+            if (uuid.equals(res.getUuid())) return index;
+            index++;
+        }
+        return -1;
+        /*
         Collections.sort(storageList, new UuidComparator());
         int index = Collections.binarySearch(storageList, new Resume(uuid, "", null), new UuidComparator());
         if (index < 0) throw new ResumeStorageException(uuid, "Resume " + uuid + " not found");
         return index;
+        */
+    }
+
+    private class Checker {
+        public Checker(String u) {
+            uuid = u;
+            index = indexInStorage(u);
+        }
+
+        public int getCheckerIndex() {
+            return index;
+        }
+
+        private String uuid;
+        private int index;
     }
 
     private class UuidComparator implements Comparator<Resume> {
-
         @Override
         public int compare(Resume o1, Resume o2) {
             return o1.getUuid().compareTo(o2.getUuid());

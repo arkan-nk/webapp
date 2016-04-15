@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by arkan on 14.04.2016.
  */
-public class ListStorageTest extends AbstractStorageTest{
+public class ListStorageTest extends AbstractStorageTest<ListStorage>{
     public ListStorageTest(){
         super(new ListStorage(new ArrayList<Resume>()));
     }

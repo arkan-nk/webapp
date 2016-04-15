@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
  * GKislin
  * 09.10.2015.
  */
-public abstract class AbstractStorageTest {
+public abstract class AbstractStorageTest<T extends Storage> {
 
     private final Storage storage;
 
@@ -96,12 +96,7 @@ public abstract class AbstractStorageTest {
     @Test
     public void testGetAllSorted() throws Exception {
         List<Resume> list = Arrays.asList(ResumeTestData.R1, ResumeTestData.R2, ResumeTestData.R3);
-        Collections.sort(list, new Comparator<Resume>() {
-                    @Override
-                    public int compare(Resume o1, Resume o2) {
-                        return o1.getUuid().compareTo(o2.getUuid());
-                    }
-                });
+        Collections.sort(list);
         assertEquals(list, new ArrayList<>(storage.getAllSorted()));
     }
 

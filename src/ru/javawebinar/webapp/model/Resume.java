@@ -24,6 +24,14 @@ public class Resume implements Comparable {
         this.about = about;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public void addContact(ContactType type, String value) {
         contacts.put(type, new Contact(type, value));
     }
@@ -71,13 +79,5 @@ public class Resume implements Comparable {
         Resume other = (Resume) o;
         int cmp = fullName.compareTo(other.fullName);
         return cmp == 0 ? uuid.compareTo(other.uuid) : cmp;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 }
