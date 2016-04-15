@@ -10,8 +10,8 @@ import java.util.*;
 public class ListStorage extends AbstractStorage {
     private List<Resume> storageList;
 
-    public ListStorage(List<Resume> listForResume) {
-        storageList = listForResume;
+    public ListStorage(List<Resume> list){
+        storageList=list;
     }
 
     @Override
@@ -20,28 +20,30 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r, int index){
+    protected void doSave(Resume r, Condition condition){
         storageList.add(r);
     }
 
     @Override
-    protected void doUpdate(Resume r, int index){
-        storageList.set(index, r);
+    protected void doUpdate(Resume r, Condition condition){
+        storageList.set(((IndexCondition)condition).getValue(), r);
     }
 
     @Override
-    protected Resume doGet(String uuid, int index) {
-        return storageList.get(index);
+    protected Resume doGet(String uuid, Condition condition) {
+        return storageList.get(((IndexCondition)condition).getValue());
     }
 
     @Override
-    protected int indexInStorage(String uuid) {
-        return getIndex(uuid);
+    protected Condition conditionInStorage(String uuid) {
+        IndexCondition ic = new IndexCondition();
+        ic.setIndex(getIndex(uuid));
+        return ic;
     }
 
     @Override
-    protected void doDelete(String uuid, int index) {
-        storageList.remove(index);
+    protected void doDelete(String uuid, Condition condition) {
+        storageList.remove(((IndexCondition)condition).getValue());
     }
 
     @Override

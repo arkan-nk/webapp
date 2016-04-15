@@ -44,27 +44,29 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r, int index) {
+    protected void doSave(Resume r, Condition condition) {
         storageMap.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doUpdate(Resume r, int index) {
+    protected void doUpdate(Resume r, Condition condition) {
         storageMap.put(r.getUuid(), r);
     }
 
     @Override
-    protected void doDelete(String uuid, int index) {
+    protected void doDelete(String uuid, Condition condition) {
         storageMap.remove(uuid);
     }
 
     @Override
-    protected Resume doGet(String uuid, int index) {
+    protected Resume doGet(String uuid, Condition condition) {
         return storageMap.get(uuid);
     }
 
     @Override
-    protected int indexInStorage(String uuid) {
-        return storageMap.containsKey(uuid)?0:-1;
+    protected Condition conditionInStorage(String uuid) {
+        MapCondition mc = new MapCondition();
+        if (storageMap.containsKey(uuid)) mc.setValue(storageMap.get(uuid));
+        return mc;
     }
 }

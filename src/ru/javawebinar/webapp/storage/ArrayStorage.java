@@ -8,6 +8,7 @@ import ru.javawebinar.webapp.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
+
     @Override
     protected void shiftDeleted(String uuid, int idx) {
         array[idx] = array[size - 1];

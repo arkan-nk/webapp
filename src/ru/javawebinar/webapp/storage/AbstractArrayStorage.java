@@ -34,26 +34,29 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r, int index) {
+    protected void doSave(Resume r, Condition condition) {
         if (size == ARRAY_LIMIT) {
             throw new ResumeStorageException(r.getUuid(), "Array size limit(" + ARRAY_LIMIT + ") exceeded");
         }
-        insert(r, index);
+        insert(r, ((IndexCondition)condition).getValue());
         size++;
     }
 
     @Override
-    protected void doUpdate(Resume r, int index) {
+    protected void doUpdate(Resume r, Condition condition) {
+        int index = ((IndexCondition)condition).getValue();
         array[index] = r;
     }
 
     @Override
-    protected Resume doGet(String uuid, int index) {
+    protected Resume doGet(String uuid, Condition condition) {
+        int index = ((IndexCondition)condition).getValue();
         return array[index];
     }
 
     @Override
-    protected void doDelete(String uuid, int index) {
+    protected void doDelete(String uuid,  Condition condition) {
+        int index = ((IndexCondition)condition).getValue();
         shiftDeleted(uuid, index);
         array[size--] = null;
     }
@@ -66,8 +69,10 @@ abstract public class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected int indexInStorage(String uuid) {
-        return getIndex(uuid);
+    protected Condition conditionInStorage(String uuid) {
+        IndexCondition ic = new IndexCondition();
+        ic.setIndex(getIndex(uuid));
+        return ic;
     }
 
     @Override
