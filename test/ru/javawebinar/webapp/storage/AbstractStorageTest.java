@@ -19,9 +19,9 @@ import static org.junit.Assert.fail;
  */
 public abstract class AbstractStorageTest<T extends Storage> {
 
-    private final Storage storage;
+    private final T storage;
 
-    public AbstractStorageTest(Storage storage) {
+    public AbstractStorageTest(T storage) {
         requireNonNull(storage, "Storage must not be null");
         this.storage = storage;
     }
@@ -96,8 +96,8 @@ public abstract class AbstractStorageTest<T extends Storage> {
     @Test
     public void testGetAllSorted() throws Exception {
         List<Resume> list = Arrays.asList(ResumeTestData.R1, ResumeTestData.R2, ResumeTestData.R3);
-        Collections.sort(list);
-        assertEquals(list, new ArrayList<>(storage.getAllSorted()));
+        //Collections.sort(list);
+        assertEquals(new ArrayList<>(list), new ArrayList<>(storage.getAllSorted()));
     }
 
     private void assertGet(Resume r) {
