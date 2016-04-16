@@ -27,7 +27,8 @@
 - Закомитьте изменения и переходите к следующему патчу
 - После накатки всех патчей сделайте push
 
-### 3. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFbVFyc1N1OXZKSFE">Работа с файлами. Ввод/вывод.</a>
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFbVFyc1N1OXZKSFE">Работа с файлами. Ввод/вывод.</a>
+> В проекте есть небольшие отличия от видео, например поле резюме `about` и исключение `ResumeStorageException` вместо `WebAppException`
 
 #### Патч <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFcV9kdFlqY0N2Q0E">1_MainFiles.patch</a>
  - <a href="http://www.intuit.ru/studies/courses/16/16/lecture/27133">Пакет java.io</a>
@@ -37,6 +38,7 @@
    - <a href="https://habrahabr.ru/company/luxoft/blog/278233/">Оптимальный путь преобразования InputStream в строку</a>
 
 #### Патч <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFekZOb0hyaUgwVDQ">2_FileStorage.patch</a>
+
  - Реализация FileStore (хранение в файлах).
  - <a href="http://www.intuit.ru/studies/courses/16/16/lecture/27133?page=4">Ввод-вывод.</a> Реализация Store используя DataInputStream/DataOutputStream.
 
