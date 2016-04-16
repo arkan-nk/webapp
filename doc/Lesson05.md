@@ -19,7 +19,7 @@
   - <a href="http://easy-code.ru/lesson/java-nested-classes">Вложенные и внутренние классы</a>. Примеры в Collections API: Arrays.asList, Map.Entry, LinkedList.Node, Collections, Iterator
   - <a href="http://easy-code.ru/lesson/local-anonymous-nested-classes-java">Локальные и анонимные классы.</a> Comparator.
 
-### 4. Логгирование
+### ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. <a href="">Логгирование</a>
   - Логирование. <a href="http://habrahabr.ru/post/130195/">Настройка логирования</a>
   - <a href="http://habrahabr.ru/post/113145/">Java Logging: история кошмара (Optional)</a>
   - <a href="http://skipy.ru/useful/logging.html">Ведение лога приложения (Optional)</a>
