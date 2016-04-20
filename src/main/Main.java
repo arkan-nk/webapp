@@ -11,6 +11,11 @@ public class Main {
      * @param args : program arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello " + args[0] + "!");
+//        Link link = new Link("name", "url");
+//        link.setName("name2");
+//        link.setUrl("ulr2");
+//        System.out.println(link.toString());
+//        System.out.println(link.getName());
+
     }
 }
