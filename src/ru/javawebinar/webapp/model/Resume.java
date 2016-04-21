@@ -1,5 +1,9 @@
 package ru.javawebinar.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,8 +13,15 @@ import java.util.UUID;
  * GKislin
  * 29.03.2016
  */
-public class Resume implements Comparable {
-    private final String uuid;
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Resume implements Comparable, Serializable {
+    private static final long serialVersionUID = 1L;
+
+    public Resume() {
+    }
+
+    private String uuid;
     private String fullName;
     private String about;
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
@@ -25,6 +36,31 @@ public class Resume implements Comparable {
         this.uuid = uuid;
         this.fullName = fullName;
         this.about = about;
+    }
+
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
     }
 
     public void addContact(ContactType type, String value) {
@@ -74,13 +110,5 @@ public class Resume implements Comparable {
         Resume other = (Resume) o;
         int cmp = fullName.compareTo(other.fullName);
         return cmp == 0 ? uuid.compareTo(other.uuid) : cmp;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 }

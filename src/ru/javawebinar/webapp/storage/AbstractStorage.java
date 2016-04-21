@@ -89,13 +89,13 @@ abstract public class AbstractStorage<C> implements Storage {
 
     private void mustNotExist(String uuid, C ctx) {
         if (exist(ctx)) {
-            throw new ResumeStorageException("Resume is already exist in storage", uuid);
+            throw new ResumeStorageException(uuid, "Resume is already exist in storage");
         }
     }
 
     private void mustExist(String uuid, C ctx) {
         if (!exist(ctx)) {
-            throw new ResumeStorageException("Resume not found in storage", uuid);
+            throw new ResumeStorageException(uuid, "Resume not found in storage");
         }
     }
 
