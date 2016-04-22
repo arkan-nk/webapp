@@ -15,6 +15,8 @@ public class ResumeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         resp.getWriter().write("Hello " + (name == null ? "WebApp" : name) + "!");
     }
 }
