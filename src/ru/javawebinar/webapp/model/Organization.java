@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,8 @@ public class Organization implements Serializable {
     private Link homePage;
     private List<Position> positions;
 
-    public Organization() {
+    private Organization() {
+        positions = new ArrayList<>();
     }
 
     public Organization(String name, String url, Position... positions) {
@@ -35,7 +37,7 @@ public class Organization implements Serializable {
 
     public Organization(Link homePage, List<Position> positions) {
         this.homePage = homePage;
-        this.positions = positions;
+        this.positions.addAll(positions);
     }
 
     public Link getHomePage() {
