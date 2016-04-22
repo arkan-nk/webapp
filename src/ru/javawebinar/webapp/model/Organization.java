@@ -36,8 +36,9 @@ public class Organization implements Serializable {
     }
 
     public Organization(Link homePage, List<Position> positions) {
+        this();
         this.homePage = homePage;
-        this.positions.addAll(positions);
+        if (positions!=null && !positions.isEmpty()) this.positions.addAll(positions);
     }
 
     public Link getHomePage() {
