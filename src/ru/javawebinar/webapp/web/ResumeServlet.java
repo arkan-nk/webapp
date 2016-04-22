@@ -13,6 +13,7 @@ import java.io.IOException;
 public class ResumeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         resp.getWriter().write("Hello " + (name == null ? "WebApp" : name) + "!");
     }
