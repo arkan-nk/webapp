@@ -2,6 +2,7 @@ package ru.javawebinar.webapp.storage;
 
 import ru.javawebinar.webapp.ResumeStorageException;
 import ru.javawebinar.webapp.model.Resume;
+import ru.javawebinar.webapp.storage.serializer.StreamSerializer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,19 +12,16 @@ import java.util.List;
  * GKislin
  * 23.10.2015.
  */
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public class FileStorage extends AbstractIOStorage<File> {
     private final File directory;
 
-    protected AbstractFileStorage(String path) {
-        directory = new File(path);
+    public FileStorage(String file, StreamSerializer streamSerializer) {
+        super(streamSerializer);
+        directory = new File(file);
         if (!directory.isDirectory()) {
-            throw new IllegalArgumentException(path + " is not directory");
+            throw new IllegalArgumentException(file + " is not directory");
         }
     }
-
-    protected abstract void write(Resume r, OutputStream os) throws IOException;
-
-    protected abstract Resume read(InputStream is) throws IOException;
 
     @Override
     protected File getContext(String uuid) {

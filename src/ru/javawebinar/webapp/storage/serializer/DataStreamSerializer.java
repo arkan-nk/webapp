@@ -1,4 +1,4 @@
-package ru.javawebinar.webapp.storage;
+package ru.javawebinar.webapp.storage.serializer;
 
 import ru.javawebinar.webapp.model.*;
 
@@ -13,14 +13,10 @@ import java.util.List;
  * GKislin
  * 23.10.2015.
  */
-public class DataStreamFileStorage extends AbstractFileStorage {
-
-    public DataStreamFileStorage(String path) {
-        super(path);
-    }
+public class DataStreamSerializer implements StreamSerializer {
 
     @Override
-    protected void write(Resume r, OutputStream os) throws IOException {
+    public void write(Resume r, OutputStream os) throws IOException {
         try (final DataOutputStream dos = new DataOutputStream(os)) {
             dos.writeUTF(r.getUuid());
             dos.writeUTF(r.getFullName());
@@ -71,7 +67,7 @@ public class DataStreamFileStorage extends AbstractFileStorage {
     }
 
     @Override
-    protected Resume read(InputStream is) throws IOException {
+    public Resume read(InputStream is) throws IOException {
         try (DataInputStream dis = new DataInputStream(is)) {
             Resume r = new Resume(dis.readUTF(), dis.readUTF(), dis.readUTF());
             readItems(dis, () -> r.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF()));

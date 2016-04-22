@@ -1,4 +1,4 @@
-package ru.javawebinar.webapp.storage;
+package ru.javawebinar.webapp.storage.serializer;
 
 import ru.javawebinar.webapp.model.*;
 import ru.javawebinar.webapp.util.XmlParser;
@@ -10,11 +10,10 @@ import java.nio.charset.StandardCharsets;
  * GKislin
  * 30.01.2015.
  */
-public class XmlFileStorage extends AbstractFileStorage {
+public class XmlStreamSerializer implements StreamSerializer {
     private XmlParser xmlParser;
 
-    public XmlFileStorage(String dir) {
-        super(dir);
+    public XmlStreamSerializer() {
         xmlParser = new XmlParser(
                 Resume.class, Organization.class, Link.class,
                 OrganizationSection.class, TextSection.class, ListSection.class, Organization.Position.class);
