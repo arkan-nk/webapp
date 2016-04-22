@@ -71,6 +71,10 @@ public class Resume implements Comparable, Serializable {
         sections.put(type, section);
     }
 
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
