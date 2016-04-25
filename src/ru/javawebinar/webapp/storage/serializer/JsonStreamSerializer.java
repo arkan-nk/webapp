@@ -1,4 +1,4 @@
-package ru.javawebinar.webapp.storage;
+package ru.javawebinar.webapp.storage.serializer;
 
 import ru.javawebinar.webapp.model.Resume;
 import ru.javawebinar.webapp.util.JsonParser;
@@ -10,11 +10,7 @@ import java.nio.charset.StandardCharsets;
  * GKislin
  * 30.10.2015.
  */
-public class JsonFileStorage extends AbstractPathStorage {
-
-    protected JsonFileStorage(String Path) {
-        super(Path);
-    }
+public class JsonStreamSerializer implements StreamSerializer {
 
     @Override
     public void write(Resume r, OutputStream os) throws IOException {
