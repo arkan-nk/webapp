@@ -12,7 +12,7 @@ import static ru.javawebinar.webapp.Config.STORAGE;
  * GKislin
  * 22.04.2016
  */
-public class ResumeServlet extends HttpServlet {
+public class ResumeServlet extends javax.servlet.http.HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("UTF-8");
