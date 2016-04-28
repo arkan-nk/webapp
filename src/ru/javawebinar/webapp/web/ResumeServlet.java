@@ -15,12 +15,20 @@ import static ru.javawebinar.webapp.Config.STORAGE;
 public class ResumeServlet extends javax.servlet.http.HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setCharacterEncoding("UTF-8");
-//        String name = req.getParameter("name");
-//        resp.setCharacterEncoding("UTF-8");
-//        resp.setContentType("text/html; charset=UTF-8");
-//        resp.getWriter().write("Hello " + (name == null ? "WebApp" : name) + "!");
-        req.setAttribute("resumeList", STORAGE.getAllSorted());
-        req.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(req, resp);
+        req.setCharacterEncoding("UTF-8");
+        String uuid = req.getParameter("uuid");
+        String ta = req.getParameter("action");
+        String action = ta!=null ? ta : "";
+        switch (action) {
+            case "view" : {
+                req.setAttribute("uuid", uuid);
+                req.getRequestDispatcher("WEB-INF/jsp/view.jsp").forward(req, resp);
+                break;
+            }
+            default: {
+                req.setAttribute("resumeList", STORAGE.getAllSorted());
+                req.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(req, resp);
+            }
+        }
     }
 }
