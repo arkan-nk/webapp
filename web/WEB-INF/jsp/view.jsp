@@ -16,7 +16,6 @@
     <c:forEach items="${resumeBean.resume.contacts}" var="contVar" varStatus="contVarStatus">
         <tr>
             <td>
-                <c:out value="${constVar.key.name}"/>
                 <c:if test="${constVar.key == resumeBean.contactTypes[3]}">
                     <img src="img/skype.png">
                 </c:if>
