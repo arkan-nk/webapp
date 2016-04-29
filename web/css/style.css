@@ -1,0 +1,29 @@
+header {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+footer {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 4px 10px 4px 0;
+    vertical-align: top;
+}
+
+tr {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+table {
+    margin-bottom: 1.4em;
+    border-collapse: collapse;
+    border-spacing: 0;
+}

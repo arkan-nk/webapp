@@ -1,5 +1,7 @@
 package ru.javawebinar.webapp.web;
 
+import ru.javawebinar.webapp.model.Resume;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +16,34 @@ import static ru.javawebinar.webapp.Config.STORAGE;
  */
 public class ResumeServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setCharacterEncoding("UTF-8");
-//        String name = req.getParameter("name");
-//        resp.setCharacterEncoding("UTF-8");
-//        resp.setContentType("text/html; charset=UTF-8");
-//        resp.getWriter().write("Hello " + (name == null ? "WebApp" : name) + "!");
-        req.setAttribute("resumeList", STORAGE.getAllSorted());
-        req.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uuid = request.getParameter("uuid");
+        String action = request.getParameter("action");
+        if (action == null) {
+            request.setAttribute("resumeList", STORAGE.getAllSorted());
+            request.getRequestDispatcher("/WEB-INF/jsp/list.jsp").forward(request, response);
+            return;
+        }
+
+        Resume r;
+        switch (action) {
+            case "delete":
+                STORAGE.delete(uuid);
+                response.sendRedirect("resume");
+                return;
+            case "create":
+                r = Resume.EMPTY;
+                break;
+            case "view":
+            case "edit":
+                r = STORAGE.get(uuid);
+                break;
+            default:
+                throw new IllegalArgumentException("Action " + action + " is illegal");
+        }
+        request.setAttribute("resume", r);
+        request.getRequestDispatcher(
+                ("view".equals(action) ? "/WEB-INF/jsp/view.jsp" : "/WEB-INF/jsp/edit.jsp")
+        ).forward(request, response);
     }
 }

@@ -18,6 +18,8 @@ import java.util.UUID;
 public class Resume implements Comparable, Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final Resume EMPTY = new Resume();
+
     public Resume() {
     }
 
@@ -72,7 +74,8 @@ public class Resume implements Comparable, Serializable {
     }
 
     public String getContact(ContactType type) {
-        return contacts.get(type);
+        String contact = contacts.get(type);
+        return contact == null ? "" : contact;
     }
 
     @Override
