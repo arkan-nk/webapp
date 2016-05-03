@@ -10,6 +10,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/resume.css">
     <jsp:useBean id="resume" type="ru.javawebinar.webapp.model.Resume" scope="request"/>
     <title>Резюме ${resume.fullName}</title>
 </head>
@@ -18,7 +19,9 @@
 <section>
     <h2>${resume.fullName}&nbsp;<a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></h2>
     <p>
-        ${resume.about}
+        <i>
+            ${resume.about}
+        </i>
     </p>
     <p>
         <c:forEach var="contactEntry" items="${resume.contacts}">
@@ -36,11 +39,11 @@
             <c:set var="section" value="${sectionEntry.value}"/>
             <jsp:useBean id="section" type="ru.javawebinar.webapp.model.Section"/>
 
-            <td><h3><a name="type.name">${type.title}</a></h3></td>
+            <td><h2><a name="${type}">${type.title}</a></h2></td>
             <c:choose>
                 <c:when test="${type=='OBJECTIVE'}">
-                    <td><h3><%=((TextSection) section).getContent()%>
-                    </h3></td>
+                    <td><h2><%=((TextSection) section).getContent()%>
+                    </h2></td>
                 </c:when>
                 <c:when test="${type=='QUALIFICATIONS' || type=='ACHIEVEMENT'}">
                     <td>
@@ -58,10 +61,10 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${empty org.homePage.url}">
-                                        ${org.homePage.name}
+                                        <h3>${org.homePage.name}</h3>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${org.homePage.url}">${org.homePage.name}</a>
+                                        <h3><a href="${org.homePage.url}">${org.homePage.name}</a></h3>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
