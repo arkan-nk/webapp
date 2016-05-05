@@ -11,6 +11,6 @@ import ru.javawebinar.webapp.storage.serializer.JsonStreamSerializer;
  */
 public class JsonPathStorageTest extends AbstractStorageTest {
     public JsonPathStorageTest() {
-        super(new PathStorage(Config.STORAGE_PATH, new JsonStreamSerializer()));
+        super(new PathStorage(Config.getStoragePath(), new JsonStreamSerializer()));
     }
 }

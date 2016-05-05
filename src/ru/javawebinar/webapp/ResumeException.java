@@ -7,6 +7,10 @@ package ru.javawebinar.webapp;
 public class ResumeException extends RuntimeException {
     private final String uuid;
 
+    public ResumeException(Throwable cause) {
+        this(null, null, cause);
+    }
+
     public ResumeException(String uuid, String message) {
         super(message);
         this.uuid = uuid;
