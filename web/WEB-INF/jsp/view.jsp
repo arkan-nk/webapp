@@ -20,7 +20,7 @@
     <h2>${resume.fullName}&nbsp;<a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></h2>
     <p>
         <i>
-            ${resume.about}
+            <%=resume.getAbout().replace("\n", "<br/>")%>
         </i>
     </p>
     <p>

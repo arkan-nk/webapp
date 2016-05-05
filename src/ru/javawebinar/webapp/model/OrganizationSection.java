@@ -1,9 +1,6 @@
 package ru.javawebinar.webapp.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * GKislin
@@ -11,6 +8,8 @@ import java.util.Objects;
  */
 public class OrganizationSection extends Section {
     private static final long serialVersionUID = 1L;
+
+    public static final OrganizationSection EMPTY = new OrganizationSection(Collections.emptyList());
 
     public OrganizationSection() {
     }

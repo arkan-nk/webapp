@@ -1,8 +1,7 @@
 package ru.javawebinar.webapp;
 
-import ru.javawebinar.webapp.model.*;
-
-import java.time.Month;
+import ru.javawebinar.webapp.model.ContactType;
+import ru.javawebinar.webapp.model.Resume;
 
 /**
  * GKislin
@@ -24,6 +23,7 @@ public class ResumeTestData {
         R2.addContact(ContactType.SKYPE, "skype2");
         R2.addContact(ContactType.PHONE, "22222");
 
+/*
         R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         R1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
         R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "SQL", "JavaScript"));
@@ -38,6 +38,7 @@ public class ResumeTestData {
                                 new Organization.Position(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", null),
                                 new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
                         new Organization("Organization12", "http://Organization12.ru")));
+*/
 
         UUID1 = R1.getUuid();
     }

@@ -24,7 +24,8 @@ import ru.javawebinar.webapp.storage.path.XmlPathStorageTest;
                 ObjectStreamPathStorageTest.class,
                 JsonPathStorageTest.class,
                 XmlFileStorageTest.class,
-                XmlPathStorageTest.class
+                XmlPathStorageTest.class,
+                SqlStorageTest.class
         })
 public class AllStorageTests {
 }

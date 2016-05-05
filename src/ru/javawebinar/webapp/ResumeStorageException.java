@@ -13,4 +13,9 @@ public class ResumeStorageException extends ResumeException {
     public ResumeStorageException(String uuid, String message, Throwable cause) {
         super(uuid, message, cause);
     }
+
+    public ResumeStorageException(Throwable cause) {
+        super(cause);
+    }
+
 }

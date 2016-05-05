@@ -7,6 +7,6 @@ import ru.javawebinar.webapp.storage.serializer.XmlStreamSerializer;
 
 public class XmlFileStorageTest extends AbstractStorageTest {
     public XmlFileStorageTest() {
-        super(new FileStorage(Config.STORAGE_PATH, new XmlStreamSerializer()));
+        super(new FileStorage(Config.getStoragePath(), new XmlStreamSerializer()));
     }
 }

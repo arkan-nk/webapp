@@ -1,4 +1,5 @@
 <%@ page import="ru.javawebinar.webapp.model.ContactType" %>
+<%@ page import="ru.javawebinar.webapp.util.HtmlUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -31,7 +32,7 @@
                         <tr>
                             <td><a href="resume?uuid=${resume.uuid}&action=view"><%=resume.getFullName()%>
                             </a></td>
-                            <td><%=resume.getContact(ContactType.MAIL)%>
+                            <td><%=HtmlUtil.getContact(resume, ContactType.MAIL)%>
                             </td>
                             <td><a href="resume?uuid=${resume.uuid}&action=delete"><img src="img/delete.png"></a>
                             </td>

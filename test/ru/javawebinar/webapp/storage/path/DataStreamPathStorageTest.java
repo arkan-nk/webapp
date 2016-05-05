@@ -11,6 +11,6 @@ import ru.javawebinar.webapp.storage.serializer.DataStreamSerializer;
  */
 public class DataStreamPathStorageTest extends AbstractStorageTest {
     public DataStreamPathStorageTest() {
-        super(new PathStorage(Config.STORAGE_PATH, new DataStreamSerializer()));
+        super(new PathStorage(Config.getStoragePath(), new DataStreamSerializer()));
     }
 }
