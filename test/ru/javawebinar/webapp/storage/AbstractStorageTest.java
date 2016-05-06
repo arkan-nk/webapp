@@ -87,7 +87,7 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = ResumeStorageException.class)
     public void testDeleteNotFound() throws Exception {
-        storage.get("dummy");
+        storage.delete("dummy");
     }
 
     @Test
