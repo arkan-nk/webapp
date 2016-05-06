@@ -74,12 +74,43 @@ public class SqlStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        //TODO
+        try (Connection conn = connectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement("update resume set FULL_NAME=?, ABOUT=? where uuid=?"))
+        {
+            ps.setString(1, r.getFullName());
+            ps.setString(2, r.getAbout());
+            ps.setString(3, r.getUuid());
+            ps.execute();
+            if(ps.getUpdateCount()<1) throw new ResumeStorageException(r.getUuid(), "resume uuid = " + r.getUuid() + " not exists");
+            updateContact(conn, r);
+        } catch (SQLException e) {
+            throw new ResumeStorageException(e);
+        }
+
+    }
+    private void updateContact(Connection conn, Resume resume) throws SQLException{
+        if (resume.getContacts().isEmpty()) return;
+        try (PreparedStatement st = conn.prepareStatement(
+                "update contact set value=? where RESUME_UUID=? and TYPE=?")) {
+            for (Map.Entry<ContactType, String> e : resume.getContacts().entrySet()) {
+                st.setString(1, e.getValue());
+                st.setString(2, resume.getUuid());
+                st.setString(3, e.getKey().name());
+                st.addBatch();
+            }
+            st.executeBatch();
+        }
     }
 
     @Override
     public void delete(String uuid) {
-        //TODO
+        try (Connection conn = connectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM resume WHERE uuid=?")) {
+            ps.setString(1, uuid);
+            ps.execute();
+        } catch (SQLException e) {
+            throw new ResumeStorageException(e);
+        }
     }
 
     @Override
@@ -110,8 +141,16 @@ public class SqlStorage implements Storage {
 
     @Override
     public int size() {
-        // TODO
-        return 0;
+        try (Connection conn = connectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT count(*) FROM resume");
+             ResultSet rs = ps.executeQuery()) {
+             rs.next();
+             Integer size = rs.getInt(1);
+             if (rs.wasNull()) return 0;
+             return size.intValue();
+        } catch (SQLException e) {
+            throw new ResumeStorageException(e);
+        }
     }
 
     private void insertContact(Connection conn, Resume r) throws SQLException {
