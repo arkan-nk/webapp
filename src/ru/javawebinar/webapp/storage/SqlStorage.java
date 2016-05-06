@@ -7,10 +7,7 @@ import ru.javawebinar.webapp.sql.ConnectionFactory;
 import ru.javawebinar.webapp.util.HtmlUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * GKislin
@@ -90,6 +87,7 @@ public class SqlStorage implements Storage {
     }
     private void updateContact(Connection conn, Resume resume) throws SQLException{
         if (resume.getContacts().isEmpty()) return;
+        ArrayList<String[]> contactArray = new ArrayList<String[]>();
         try (PreparedStatement st = conn.prepareStatement(
                 "update contact set value=? where RESUME_UUID=? and TYPE=?")) {
             for (Map.Entry<ContactType, String> e : resume.getContacts().entrySet()) {
@@ -97,8 +95,25 @@ public class SqlStorage implements Storage {
                 st.setString(2, resume.getUuid());
                 st.setString(3, e.getKey().name());
                 st.addBatch();
+                contactArray.add(new String[]{e.getValue(), resume.getUuid(), e.getKey().name()});
             }
-            st.executeBatch();
+            int[] arraySuccess = st.executeBatch();
+            if (arraySuccess!=null && arraySuccess.length>0) {
+                for (int ii=arraySuccess.length-1; ii>=0; ii--) {
+                    if(arraySuccess[ii]>0) contactArray.remove(ii);
+                }
+            }
+        }
+        if (contactArray.isEmpty()) return;
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO contact (resume_uuid, type, value) VALUES (?,?,?)")){
+            for(String[] contIns : contactArray){
+                ps.setString(1,contIns[0]);
+                ps.setString(2,contIns[1]);
+                ps.setString(3, contIns[2]);
+                ps.addBatch();
+            }
+            ps.executeBatch();
         }
     }
 
