@@ -77,8 +77,8 @@ public class SqlStorage implements Storage {
             ps.setString(1, r.getFullName());
             ps.setString(2, r.getAbout());
             ps.setString(3, r.getUuid());
-            ps.execute();
-            if(ps.getUpdateCount()<1) throw new ResumeStorageException(r.getUuid(), "resume uuid = " + r.getUuid() + " not exists");
+            int countUpdate = ps.executeUpdate();
+            if(countUpdate<1) throw new ResumeStorageException(r.getUuid(), "resume uuid = " + r.getUuid() + " not exists");
             updateContact(conn, r);
         } catch (SQLException e) {
             throw new ResumeStorageException(e);
@@ -162,7 +162,7 @@ public class SqlStorage implements Storage {
              rs.next();
              Integer size = rs.getInt(1);
              if (rs.wasNull()) return 0;
-             return size.intValue();
+             return size;
         } catch (SQLException e) {
             throw new ResumeStorageException(e);
         }
