@@ -59,15 +59,10 @@ public abstract class AbstractStorageTest {
         assertGet(ResumeTestData.R2);
     }
 
-    @Test
+    @Test(expected = ResumeStorageException.class)
     public void testUpdateMissed() throws Exception {
         Resume resume = new Resume("fullName_U1", "location_U1");
-        try {
-            storage.update(resume);
-        } catch (Exception e) {
-            return;
-        }
-        fail("Excpected ResumeStorageException");
+        storage.update(resume);
     }
 
     @Test

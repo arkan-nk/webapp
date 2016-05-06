@@ -7,10 +7,7 @@ import ru.javawebinar.webapp.sql.ConnectionFactory;
 import ru.javawebinar.webapp.util.HtmlUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * GKislin
@@ -74,12 +71,61 @@ public class SqlStorage implements Storage {
 
     @Override
     public void update(Resume r) {
-        //TODO
+        try (Connection conn = connectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement("update resume set FULL_NAME=?, ABOUT=? where uuid=?"))
+        {
+            ps.setString(1, r.getFullName());
+            ps.setString(2, r.getAbout());
+            ps.setString(3, r.getUuid());
+            ps.execute();
+            if(ps.getUpdateCount()<1) throw new ResumeStorageException(r.getUuid(), "resume uuid = " + r.getUuid() + " not exists");
+            updateContact(conn, r);
+        } catch (SQLException e) {
+            throw new ResumeStorageException(e);
+        }
+
+    }
+    private void updateContact(Connection conn, Resume resume) throws SQLException{
+        if (resume.getContacts().isEmpty()) return;
+        ArrayList<String[]> contactArray = new ArrayList<String[]>();
+        try (PreparedStatement st = conn.prepareStatement(
+                "update contact set value=? where RESUME_UUID=? and TYPE=?")) {
+            for (Map.Entry<ContactType, String> e : resume.getContacts().entrySet()) {
+                st.setString(1, e.getValue());
+                st.setString(2, resume.getUuid());
+                st.setString(3, e.getKey().name());
+                st.addBatch();
+                contactArray.add(new String[]{e.getValue(), resume.getUuid(), e.getKey().name()});
+            }
+            int[] arraySuccess = st.executeBatch();
+            if (arraySuccess!=null && arraySuccess.length>0) {
+                for (int ii=arraySuccess.length-1; ii>=0; ii--) {
+                    if(arraySuccess[ii]>0) contactArray.remove(ii);
+                }
+            }
+        }
+        if (contactArray.isEmpty()) return;
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO contact (resume_uuid, type, value) VALUES (?,?,?)")){
+            for(String[] contIns : contactArray){
+                ps.setString(1,contIns[0]);
+                ps.setString(2,contIns[1]);
+                ps.setString(3, contIns[2]);
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
     }
 
     @Override
     public void delete(String uuid) {
-        //TODO
+        try (Connection conn = connectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM resume WHERE uuid=?")) {
+            ps.setString(1, uuid);
+            ps.execute();
+        } catch (SQLException e) {
+            throw new ResumeStorageException(e);
+        }
     }
 
     @Override
@@ -110,8 +156,16 @@ public class SqlStorage implements Storage {
 
     @Override
     public int size() {
-        // TODO
-        return 0;
+        try (Connection conn = connectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT count(*) FROM resume");
+             ResultSet rs = ps.executeQuery()) {
+             rs.next();
+             Integer size = rs.getInt(1);
+             if (rs.wasNull()) return 0;
+             return size.intValue();
+        } catch (SQLException e) {
+            throw new ResumeStorageException(e);
+        }
     }
 
     private void insertContact(Connection conn, Resume r) throws SQLException {
