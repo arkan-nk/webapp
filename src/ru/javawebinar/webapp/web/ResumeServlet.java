@@ -22,6 +22,13 @@ public class ResumeServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+        if (storage==null) {
+            Config.get(
+                    getServletContext().getInitParameter("storage.dir"),
+                    getServletContext().getInitParameter("db.url"),
+                    getServletContext().getInitParameter("db.user"),
+                    getServletContext().getInitParameter("db.password"));
+        }
         storage = Config.getStorage();
     }
 
