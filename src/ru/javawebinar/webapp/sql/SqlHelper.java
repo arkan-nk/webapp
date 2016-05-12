@@ -40,6 +40,8 @@ public class SqlHelper {
             } catch (SQLException e) {
                 conn.rollback();
                 throw e;
+            } finally {
+                conn.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw ExceptionUtil.convertException(e);
@@ -47,3 +49,4 @@ public class SqlHelper {
     }
 
 }
+
